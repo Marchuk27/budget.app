@@ -1,2 +1,2 @@
 # budget.app
-desktop application to control cash flow
+JavaFX desktop application to control cash flow
