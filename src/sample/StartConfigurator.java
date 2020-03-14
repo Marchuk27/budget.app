@@ -8,7 +8,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -23,8 +22,8 @@ public class StartConfigurator {
         File firstFile = new File(new File("").getAbsolutePath());
         File parentFile = firstFile.getParentFile();
         File grandParentFile = parentFile.getParentFile();
-        return grandParentFile.toString() + "/production/BudgetApp/files/";
-//        return "C:/Users/aleks/Documents/BudgetApp/out/production/BudgetApp/files/";
+//        return grandParentFile.toString() + "/production/BudgetApp/files/";
+        return "C:/Users/aleks/Documents/BudgetApp/out/production/BudgetApp/files/";
     }
 
     protected void getStyleSheetsForNodes(AnchorPane pane, Button b1, Button b2, Button b3, Button b4, AnchorPane
@@ -43,21 +42,20 @@ public class StartConfigurator {
         b3.getStyleClass().add("raspberryTheme");
     }
 
-    protected void calculateTime(AnchorPane morningPane, AnchorPane midDayPane, AnchorPane eveningPane,
-                                     AnchorPane nightPane) {
+    protected void calculateTime(List<AnchorPane> greetingsPaneList) {
         Calendar calendar = Calendar.getInstance();
         int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
         if (hourOfDay >= 5 && hourOfDay < 12) { //утро
-            morningPane.setVisible(true);
+            greetingsPaneList.get(0).setVisible(true);
         }
         if (hourOfDay > 11 && hourOfDay <= 16) { //день
-            midDayPane.setVisible(true);
+            greetingsPaneList.get(1).setVisible(true);
         }
         if (hourOfDay > 16) { //вечер
-            eveningPane.setVisible(true);
+            greetingsPaneList.get(2).setVisible(true);
         }
         if (hourOfDay >= 0 && hourOfDay <= 4) { //ночь
-            nightPane.setVisible(true);
+            greetingsPaneList.get(3).setVisible(true);
         }
     }
 
@@ -114,5 +112,4 @@ public class StartConfigurator {
             }
         });
     }
-
  }

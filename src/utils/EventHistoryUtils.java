@@ -46,7 +46,6 @@ public class EventHistoryUtils {
     }
 
     public static void createEventsHistoryTable(GridPane table, String monthName) throws IOException, ClassNotFoundException {
-        initEventHistoryTable(table);
         List<EventDto> eventsHistory = loadEventsHistoryFromTxt(monthName);
         Label sumLabel;
         for (EventDto event : eventsHistory) {
@@ -87,11 +86,5 @@ public class EventHistoryUtils {
         if (list.size() == 1 && list.get(0).getDateOfEvent().equalsIgnoreCase(FRANKLIN_BDAY)) {
             list.remove(0);
         }
-    }
-
-    private static void initEventHistoryTable(GridPane table) {
-        table.add(new Label("Дата"), 0, 0);
-        table.add(new Label("Категория"), 1, 0);
-        table.add(new Label("Сумма"), 2, 0);
     }
 }

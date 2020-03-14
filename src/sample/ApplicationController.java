@@ -1,5 +1,6 @@
 package sample;
 
+import categories.AbstractCategory;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -18,8 +19,9 @@ import utils.EventHistoryUtils;
 
 import static utils.CategoriesValueCalculator.*;
 import static utils.CategoryValuesChangesMap.*;
-import static utils.NodesActionClass.*;
+import static utils.NodesUtils.*;
 import static utils.PieChartSlicesMaker.*;
+import static utils.CategoriesUtils.*;
 
 import java.io.*;
 import java.util.*;
@@ -29,10 +31,11 @@ public class ApplicationController extends StartConfigurator {
     @FXML private Rectangle head;
     @FXML private ImageView logoView;
 
-    @FXML private AnchorPane goodEveningPane;
-    @FXML private AnchorPane goodNightPane;
-    @FXML private AnchorPane goodMorningPane;
-    @FXML private AnchorPane goodAfternoonPane;
+    @FXML private AnchorPane eveningPane;
+    @FXML private AnchorPane nightPane;
+    @FXML private AnchorPane morningPane;
+    @FXML private AnchorPane afternoonPane;
+    List<AnchorPane> greetingPanesList;
 
     @FXML private Rectangle g1;
     @FXML private Rectangle g2;
@@ -53,10 +56,12 @@ public class ApplicationController extends StartConfigurator {
     @FXML private Label addDiary;
     @FXML private Button acceptButton;
 
-    @FXML private CheckBox deleteDiaryCheckBox1;
-    @FXML private CheckBox deleteDiaryCheckBox2;
-    @FXML private CheckBox deleteDiaryCheckBox3;
-    @FXML private CheckBox deleteDiaryCheckBox4;
+    @FXML private CheckBox deleteCheckBox1;
+    @FXML private CheckBox deleteCheckBox2;
+    @FXML private CheckBox deleteCheckBox3;
+    @FXML private CheckBox deleteCheckBox4;
+    List<CheckBox> checkBoxList = createCheckBoxListForDelete(deleteCheckBox1, deleteCheckBox2,
+            deleteCheckBox3, deleteCheckBox4);
 
     @FXML private Label diaryNameLabel;
     @FXML private Label workAreaMonthAndDiaryLabel;
@@ -174,9 +179,10 @@ public class ApplicationController extends StartConfigurator {
     @FXML private ToggleButton blueThemeOn = new ToggleButton();
     @FXML private ToggleButton redThemeOn = new ToggleButton();
 
-    private List<Label> categoriesLabelList = new ArrayList<Label>();
-    private List<Label> categoriesValueList = new ArrayList<Label>();
-    private List<Label> resetValuesLabelList = new ArrayList<Label>();
+    private List<AbstractCategory> categoriesList = getCategoriesAsList();
+    private List<Label> categoriesLabelList = new ArrayList<>();
+    private List<Label> categoriesValueList = new ArrayList<>();
+    private List<Label> resetValuesLabelList = new ArrayList<>();
     private String[] pieColors = new String[16];
     List<PieChart.Data> slices = new ArrayList<>();
     List<PieChart.Data> slices2 = new ArrayList<>();
@@ -189,15 +195,16 @@ public class ApplicationController extends StartConfigurator {
     File[] yearFilesArray = folder.listFiles();
 
     @FXML
-    public void initialize() throws IOException, ClassNotFoundException {
+    public void initialize() {
+        greetingPanesList = createGreetingPanesList(morningPane, afternoonPane, eveningPane, nightPane);
         getStyleSheetsForNodes(pane, diaryButton, settingsButton, themeButton, infoButton, paneWithCategories);
         getStyleClassesForThemeButtons(defaultThemeOn, blueThemeOn, redThemeOn);
-        calculateTime(goodMorningPane, goodAfternoonPane, goodEveningPane, goodNightPane);
+        calculateTime(greetingPanesList);
         setThemeButtonsLogic();
         diaryNameLabel.setFont(Font.font("Helvetica", FontWeight.BOLD, 27));
         diaryNameLabel.setTextFill(Color.valueOf("3D5064"));
-        addLabelsToCategoriesValueList();
         addLabelsAndStylesToCategoriesLabelList();
+        addLabelsToCategoriesValueList();
         monthCosts.setFont(Font.font("Helvetica", FontWeight.BOLD, 14));
         monthIncomes.setFont(Font.font("Helvetica", FontWeight.BOLD, 14));
         addLabelsToResetValuesLabelList();
@@ -205,6 +212,7 @@ public class ApplicationController extends StartConfigurator {
         addSlicesToLists(slices, slices2, costsPieChart, incomesPieChart);
         setPieChartsData(slices, slices2, categoriesValueList, pieColors);
         setEventHandlerForLogoView(logoView);
+
         //отображение дневников в пэйне по количеству лет
         treeViewAreaPane.setOrientation(Orientation.VERTICAL);
         if (yearFilesArray != null) {
@@ -225,10 +233,7 @@ public class ApplicationController extends StartConfigurator {
             @Override
             public void handle(ActionEvent actionEvent) {
                 treeViewAreaPane.setVisible(true);
-                g1.setVisible(true);
-                g2.setVisible(false);
-                g3.setVisible(false);
-                g4.setVisible(false);
+                setFirstRectangleTrueVisible(g1, g2, g3, g4);
                 settingsButton.setLayoutY(329);
                 themeButton.setLayoutY(409);
                 infoButton.setLayoutY(491);
@@ -237,8 +242,7 @@ public class ApplicationController extends StartConfigurator {
                 defaultThemeOn.setVisible(false);
                 blueThemeOn.setVisible(false);
                 redThemeOn.setVisible(false);
-                setDayPartPanesVisibleFalse(goodMorningPane, goodAfternoonPane, goodEveningPane,
-                        goodNightPane);
+                setDayPartPanesVisibleFalse(greetingPanesList);
                 setDefaultVisibleForElements(paneWithMonthButtons, paneWithCategories,
                         diaryNameLabel, workAreaMonthAndDiaryLabel, backToMonthLabel, labelWithMonth);
             }
@@ -246,10 +250,7 @@ public class ApplicationController extends StartConfigurator {
         settingsButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                g1.setVisible(false);
-                g2.setVisible(true);
-                g3.setVisible(false);
-                g4.setVisible(false);
+                setFirstRectangleTrueVisible(g2, g1, g3, g4);
                 defaultThemeOn.setVisible(false);
                 blueThemeOn.setVisible(false);
                 redThemeOn.setVisible(false);
@@ -260,17 +261,13 @@ public class ApplicationController extends StartConfigurator {
         themeButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+                setFirstRectangleTrueVisible(g3, g2, g1, g4);
                 defaultThemeOn.setVisible(true);
                 blueThemeOn.setVisible(true);
                 redThemeOn.setVisible(true);
-                g1.setVisible(false);
-                g2.setVisible(false);
-                g3.setVisible(true);
-                g4.setVisible(false);
-                setDayPartPanesVisibleFalse(goodMorningPane, goodAfternoonPane, goodEveningPane,
-                        goodNightPane);
-                setDefaultConditionForCheckBox(deleteDiaryCheckBox1, deleteDiaryCheckBox2, deleteDiaryCheckBox3, deleteDiaryCheckBox4);
-                setDefaultVisibleForCheckBox(acceptButton, deleteDiaryCheckBox1, deleteDiaryCheckBox2, deleteDiaryCheckBox3, deleteDiaryCheckBox4);
+                setDayPartPanesVisibleFalse(greetingPanesList);
+                checkBoxList.forEach(cb -> cb.setSelected(false));
+                setDefaultVisibleForCheckBox(acceptButton, checkBoxList);
                 setConditionForThemeButton(treeViewAreaPane, settingsButton, themeButton,
                         infoButton, deleteDiary, addDiary);
                 setDefaultVisibleForElements(paneWithMonthButtons, paneWithCategories, diaryNameLabel,
@@ -281,10 +278,7 @@ public class ApplicationController extends StartConfigurator {
         infoButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                g1.setVisible(false);
-                g2.setVisible(false);
-                g3.setVisible(false);
-                g4.setVisible(true);
+                setFirstRectangleTrueVisible(g4, g2, g3, g1);
                 defaultThemeOn.setVisible(false);
                 blueThemeOn.setVisible(false);
                 redThemeOn.setVisible(false);
@@ -301,22 +295,19 @@ public class ApplicationController extends StartConfigurator {
                     int buttonAmount = yearFilesArr.length;
                     switch (buttonAmount) {
                         case 1:
-                            deleteDiaryCheckBox1.setVisible(true);
+                            deleteCheckBox1.setVisible(true);
                             break;
                         case 2:
-                            deleteDiaryCheckBox1.setVisible(true);
-                            deleteDiaryCheckBox2.setVisible(true);
+                            deleteCheckBox1.setVisible(true);
+                            deleteCheckBox2.setVisible(true);
                             break;
                         case 3:
-                            deleteDiaryCheckBox1.setVisible(true);
-                            deleteDiaryCheckBox2.setVisible(true);
-                            deleteDiaryCheckBox3.setVisible(true);
+                            deleteCheckBox1.setVisible(true);
+                            deleteCheckBox2.setVisible(true);
+                            deleteCheckBox3.setVisible(true);
                             break;
                         case 4:
-                            deleteDiaryCheckBox1.setVisible(true);
-                            deleteDiaryCheckBox2.setVisible(true);
-                            deleteDiaryCheckBox3.setVisible(true);
-                            deleteDiaryCheckBox4.setVisible(true);
+                            checkBoxList.forEach(cb -> cb.setVisible(true));
                             break;
                     }
                     addDiary.setDisable(true);
@@ -376,12 +367,7 @@ public class ApplicationController extends StartConfigurator {
                 File[] yearsArray = folder.listFiles();
                 assert yearsArray != null;
                 Arrays.sort(yearsArray, Comparator.comparingLong(File::lastModified));
-                setDefaultVisibleForCheckBox(acceptButton, deleteDiaryCheckBox1, deleteDiaryCheckBox2, deleteDiaryCheckBox3, deleteDiaryCheckBox4);
-                List<CheckBox> checkBoxList = new ArrayList<>();
-                checkBoxList.add(deleteDiaryCheckBox1);
-                checkBoxList.add(deleteDiaryCheckBox2);
-                checkBoxList.add(deleteDiaryCheckBox3);
-                checkBoxList.add(deleteDiaryCheckBox4);
+                setDefaultVisibleForCheckBox(acceptButton, checkBoxList);
                 for (int i = 4; i > 0; i--) {
                     if (checkBoxList.get(i - 1).isSelected()) {
                         treeViewAreaPane.getChildren().remove(i - 1);
@@ -397,7 +383,7 @@ public class ApplicationController extends StartConfigurator {
                     }
                 }
 
-                setDefaultConditionForCheckBox(deleteDiaryCheckBox1, deleteDiaryCheckBox2, deleteDiaryCheckBox3, deleteDiaryCheckBox4);
+                setDefaultConditionForCheckBox(checkBoxList);
                 addDiary.setDisable(false);
                 deleteDiary.setVisible(true);
                 paneWithMonthButtons.setVisible(false);
@@ -540,38 +526,25 @@ public class ApplicationController extends StartConfigurator {
 
     private void addStylesAndActionsForMonthButtons() {
         paneWithMonthButtons.getStylesheets().add(getClass().getResource("/css/HoverButton.css").toExternalForm());
-        List<Button> buttonList = new ArrayList<>(Arrays.asList(januaryButton, februaryButton, marchButton, aprilButton));
-        buttonList.add(januaryButton);
-        buttonList.add(februaryButton);
-        buttonList.add(marchButton);
-        buttonList.add(aprilButton);
-        buttonList.add(mayButton);
-        buttonList.add(juneButton);
-        buttonList.add(julyButton);
-        buttonList.add(augustButton);
-        buttonList.add(septemberButton);
-        buttonList.add(octoberButton);
-        buttonList.add(novemberButton);
-        buttonList.add(decemberButton);
+        List<Button> buttonList = new ArrayList<>();
+        fillMonthButtonList(buttonList);
         for (Button btn : buttonList) {
             btn.getStyleClass().add("monthButton");
             btn.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
-                    setDefaultConditionForButtons(treeViewAreaPane, settingsButton,
-                            themeButton, infoButton, deleteDiary, addDiary);
+                    setDefaultConditionForButtons(treeViewAreaPane, settingsButton, themeButton, infoButton,
+                            deleteDiary, addDiary);
                     paneWithMonthButtons.setVisible(false);
                     diaryNameLabel.setVisible(false);
                     paneWithCategories.setVisible(true);
                     backToMonthLabel.setVisible(true);
                     labelWithMonth.setVisible(true);
-                    workAreaMonthAndDiaryLabel.setVisible(true);
                     int len = btn.getId().length();
                     StringBuilder buttonName = new StringBuilder(btn.getId().substring(0, len - 6));
                     StringBuilder resultName = new StringBuilder(buttonName.toString().substring(0, 1).toUpperCase() + buttonName.toString().substring(1));
-                    workAreaMonthAndDiaryLabel.setText(resultName + ", " + diaryNameLabel.getText());
-                    workAreaMonthAndDiaryLabel.setFont(Font.font("Helvetica", FontWeight.BOLD, 19));
-                    workAreaMonthAndDiaryLabel.setTextFill(Color.valueOf("3D5064"));
+
+                    setParamsForWorkAreaMonthAndDiaryLabel(workAreaMonthAndDiaryLabel, diaryNameLabel, resultName);
                     path.append(buttonName).append(".txt");
                     try {
                         readLinesFromTxt(path);
@@ -630,27 +603,12 @@ public class ApplicationController extends StartConfigurator {
     }
 
     private void addLabelsAndStylesToCategoriesLabelList() {
-        categoriesLabelList.add(supermarketsLabel);
-        categoriesLabelList.add(beautyAndHealthLabel);
-        categoriesLabelList.add(houseAndRepairsLabel);
-        categoriesLabelList.add(transportLabel);
-        categoriesLabelList.add(clothesAndShoesLabel);
-        categoriesLabelList.add(entertainmentsLabel);
-        categoriesLabelList.add(giftsLabel);
-        categoriesLabelList.add(stateServicesLabel);
-        categoriesLabelList.add(zhkuLabel);
-        categoriesLabelList.add(anotherCostsLabel);
-        categoriesLabelList.add(salaryLabel);
-        categoriesLabelList.add(businessLabel);
-        categoriesLabelList.add(investLabel);
-        categoriesLabelList.add(depositLabel);
-        categoriesLabelList.add(socialPaymentsLabel);
-        categoriesLabelList.add(anotherIncomesLabel);
+        addLabelsForCategoryList();
         Tooltip tooltip = new Tooltip("Нажмите, чтобы добавить сумму");
         tooltip.setPrefSize(180, 14);
         tooltip.setStyle("-fx-background-color: #E9E1E1; -fx-text-fill: black;");
         tooltip.setOpacity(0.9);
-        for (Label myLabel : categoriesLabelList) {
+        for (Label myLabel : getCategoriesLabels(categoriesList)) {
             myLabel.getStyleClass().add("myLabel");
             myLabel.setTooltip(tooltip);
             myLabel.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -682,6 +640,34 @@ public class ApplicationController extends StartConfigurator {
         cancelTooltip.setStyle("-fx-background-color: #E9E1E1; -fx-text-fill: black;");
         cancelTooltip.setOpacity(0.9);
         revertLastValue.setTooltip(cancelTooltip);
+    }
+
+    private void addLabelsForCategoryList() {
+        fillCategoriesLabelList(categoriesLabelList);
+        int i = 0;
+        for (AbstractCategory category : categoriesList) {
+            category.setCategoryLabel(categoriesLabelList.get(i));
+            i++;
+        }
+    }
+
+    private void fillCategoriesLabelList(List<Label> categoriesLabelList) {
+        categoriesLabelList.add(supermarketsLabel);
+        categoriesLabelList.add(beautyAndHealthLabel);
+        categoriesLabelList.add(houseAndRepairsLabel);
+        categoriesLabelList.add(transportLabel);
+        categoriesLabelList.add(clothesAndShoesLabel);
+        categoriesLabelList.add(entertainmentsLabel);
+        categoriesLabelList.add(giftsLabel);
+        categoriesLabelList.add(stateServicesLabel);
+        categoriesLabelList.add(zhkuLabel);
+        categoriesLabelList.add(anotherCostsLabel);
+        categoriesLabelList.add(salaryLabel);
+        categoriesLabelList.add(businessLabel);
+        categoriesLabelList.add(investLabel);
+        categoriesLabelList.add(depositLabel);
+        categoriesLabelList.add(socialPaymentsLabel);
+        categoriesLabelList.add(anotherIncomesLabel);
     }
 
     private void addLabelsToResetValuesLabelList() {
@@ -722,10 +708,9 @@ public class ApplicationController extends StartConfigurator {
     }
 
     private void doActionsWithNodes() {
-        setDayPartPanesVisibleFalse(goodMorningPane, goodAfternoonPane, goodEveningPane, goodNightPane);
-
-        setDefaultConditionForCheckBox(deleteDiaryCheckBox1, deleteDiaryCheckBox2, deleteDiaryCheckBox3, deleteDiaryCheckBox4);
-        setDefaultVisibleForCheckBox(acceptButton, deleteDiaryCheckBox1, deleteDiaryCheckBox2, deleteDiaryCheckBox3, deleteDiaryCheckBox4);
+        setDayPartPanesVisibleFalse(greetingPanesList);
+        checkBoxList.forEach(cb -> cb.setSelected(false));
+        setDefaultVisibleForCheckBox(acceptButton, checkBoxList);
 
         setDefaultConditionForButtons(treeViewAreaPane, settingsButton, themeButton, infoButton, deleteDiary, addDiary);
         setDefaultVisibleForElements(paneWithMonthButtons, paneWithCategories, diaryNameLabel, workAreaMonthAndDiaryLabel,
@@ -733,8 +718,8 @@ public class ApplicationController extends StartConfigurator {
     }
 
     private void setMonthCostsAndIncomes() {
-        monthCosts.setText(Integer.toString(calculateGeneralCosts(categoriesValueList, slices, slices2, pieColors)));
-        monthIncomes.setText(Integer.toString(calculateGeneralIncomes(categoriesValueList, slices, slices2, pieColors)));
+        monthCosts.setText((calculateGeneralCosts(categoriesValueList, slices, slices2, pieColors)));
+        monthIncomes.setText((calculateGeneralIncomes(categoriesValueList, slices, slices2, pieColors)));
     }
 
     private String calculateProfit() {
@@ -837,5 +822,20 @@ public class ApplicationController extends StartConfigurator {
         settingsButton.getStyleClass().add("settingsButton");
         themeButton.getStyleClass().add("themeButton");
         infoButton.getStyleClass().add("infoButton");
+    }
+
+    private void fillMonthButtonList(List<Button> buttonList) {
+        buttonList.add(januaryButton);
+        buttonList.add(februaryButton);
+        buttonList.add(marchButton);
+        buttonList.add(aprilButton);
+        buttonList.add(mayButton);
+        buttonList.add(juneButton);
+        buttonList.add(julyButton);
+        buttonList.add(augustButton);
+        buttonList.add(septemberButton);
+        buttonList.add(octoberButton);
+        buttonList.add(novemberButton);
+        buttonList.add(decemberButton);
     }
 }

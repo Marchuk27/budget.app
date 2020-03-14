@@ -1,27 +1,45 @@
 package utils;
 
-import static constants.CategoriesTextForFiles.*;
+import categories.AbstractCategory;
 import enumerations.Months;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
-public class NodesActionClass {
+public class NodesUtils {
 
-    public static void setDayPartPanesVisibleFalse(AnchorPane p1, AnchorPane p2, AnchorPane p3, AnchorPane p4) {
-        p1.setVisible(false);
-        p2.setVisible(false);
-        p3.setVisible(false);
-        p4.setVisible(false);
+    public static List<AnchorPane> createGreetingPanesList(AnchorPane p1, AnchorPane p2, AnchorPane p3, AnchorPane p4) {
+        List<AnchorPane> greetingList = new ArrayList<>();
+        greetingList.add(p1);
+        greetingList.add(p2);
+        greetingList.add(p3);
+        greetingList.add(p4);
+        return greetingList;
+    }
+
+    public static void setDayPartPanesVisibleFalse(List<AnchorPane> greetingPanesList) {
+        greetingPanesList.forEach(pane -> pane.setVisible(false));
+    }
+
+    public static void setFirstRectangleTrueVisible(Rectangle g1, Rectangle g2, Rectangle g3, Rectangle g4) {
+        g1.setVisible(true);
+        g2.setVisible(false);
+        g3.setVisible(false);
+        g4.setVisible(false);
     }
 
     public static void setDefaultConditionForButtons(FlowPane treeViewPane, Button settingsButton, Button themeButton,
@@ -44,19 +62,18 @@ public class NodesActionClass {
         addDiary.setVisible(false);
     }
 
-    public static void setDefaultVisibleForCheckBox(Button acceptButton, CheckBox cb1, CheckBox cb2, CheckBox cb3, CheckBox cb4) {
-        acceptButton.setVisible(false);
-        cb1.setVisible(false);
-        cb2.setVisible(false);
-        cb3.setVisible(false);
-        cb4.setVisible(false);
+
+    public static List<CheckBox> createCheckBoxListForDelete(CheckBox cb1, CheckBox cb2, CheckBox cb3, CheckBox cb4) {
+        return new ArrayList<>(Arrays.asList(cb1, cb2, cb3, cb4));
     }
 
-    public static void setDefaultConditionForCheckBox(CheckBox cb1, CheckBox cb2, CheckBox cb3, CheckBox cb4) {
-        cb1.setSelected(false);
-        cb2.setSelected(false);
-        cb3.setSelected(false);
-        cb4.setSelected(false);
+    public static void setDefaultVisibleForCheckBox(Button acceptButton, List<CheckBox> checkBoxList) {
+        acceptButton.setVisible(false);
+        checkBoxList.forEach(cb -> cb.setVisible(false));
+    }
+
+    public static void setDefaultConditionForCheckBox(List<CheckBox> checkBoxList) {
+        checkBoxList.forEach(cb -> cb.setSelected(false));
     }
 
     public static void setDefaultVisibleForElements(FlowPane paneWithMonthButtons, AnchorPane paneWithCategories,
@@ -68,6 +85,14 @@ public class NodesActionClass {
         workAreaLabel.setVisible(false);
         backToMonth.setVisible(false);
         labelWithMonth.setVisible(false);
+    }
+
+    public static void setParamsForWorkAreaMonthAndDiaryLabel(Label workAreaMonthAndDiaryLabel, Label diaryNameLabel,
+                                                              StringBuilder resultName) {
+        workAreaMonthAndDiaryLabel.setVisible(true);
+        workAreaMonthAndDiaryLabel.setText(resultName + ", " + diaryNameLabel.getText());
+        workAreaMonthAndDiaryLabel.setFont(Font.font("Helvetica", FontWeight.BOLD, 19));
+        workAreaMonthAndDiaryLabel.setTextFill(Color.valueOf("3D5064"));
     }
 
     public static void setMonthsForYearButton(Button button, String path) throws IOException {
@@ -88,21 +113,8 @@ public class NodesActionClass {
     }
 
     private static void addCategoriesStringToList(List<String> list) {
-        list.add(SUPERMARKET_TXT);
-        list.add(BEAUTY_HEALTH_TXT);
-        list.add(HOUSE_REPAIR_TXT);
-        list.add(TRANSPORT_TXT);
-        list.add(CLOTHES_SHOES_TXT);
-        list.add(ENTERTAINMENT_TXT);
-        list.add(GIFT_TXT);
-        list.add(STATE_SERVICE_TXT);
-        list.add(ZHKU_TXT);
-        list.add(ANOTH_COST_TXT);
-        list.add(SALARY_TXT);
-        list.add(BUSINESS_TXT);
-        list.add(INVEST_TXT);
-        list.add(DEPOSIT_TXT);
-        list.add(SOCIAL_TXT);
-        list.add(ANOTH_INCOME_TXT);
+        for (AbstractCategory category : CategoriesUtils.getCategoriesAsList()) {
+            list.add(category.getFieldToTxtFile());
+        }
     }
 }

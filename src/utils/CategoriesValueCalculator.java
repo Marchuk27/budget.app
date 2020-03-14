@@ -91,7 +91,7 @@ public class CategoriesValueCalculator {
         }
     }
 
-    public static int calculateGeneralCosts(List<Label> categoriesValueList, List<PieChart.Data> slices,
+    public static String calculateGeneralCosts(List<Label> categoriesValueList, List<PieChart.Data> slices,
                                       List<PieChart.Data> slices2, String[] pieColors) {
         int generalCosts = 0;
         int k = 0;
@@ -99,14 +99,14 @@ public class CategoriesValueCalculator {
             generalCosts += Integer.parseInt(categoryValue.getText());
             k++;
             if (k == 10) {
-                return generalCosts;
+                return Integer.toString(generalCosts);
             }
         }
         PieChartSlicesMaker.setPieChartsData(slices, slices2, categoriesValueList, pieColors);
-        return generalCosts;
+        return Integer.toString(generalCosts);
     }
 
-    public static int calculateGeneralIncomes(List<Label> categoriesValueList, List<PieChart.Data> slices,
+    public static String calculateGeneralIncomes(List<Label> categoriesValueList, List<PieChart.Data> slices,
                                         List<PieChart.Data> slices2, String[] pieColors) {
         int generalIncomes = 0;
         int k = 0;
@@ -117,7 +117,7 @@ public class CategoriesValueCalculator {
             k++;
         }
         PieChartSlicesMaker.setPieChartsData(slices, slices2, categoriesValueList, pieColors);
-        return generalIncomes;
+        return Integer.toString(generalIncomes);
     }
 
     public static void revertValue(List<Label> categoriesValueList, StringBuilder path) throws IOException {

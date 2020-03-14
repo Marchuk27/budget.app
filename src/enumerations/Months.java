@@ -1,7 +1,5 @@
 package enumerations;
 
-import javafx.scene.chart.PieChart;
-
 public enum Months {
     january(1),
     february(2),
