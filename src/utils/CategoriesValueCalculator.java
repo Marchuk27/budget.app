@@ -161,4 +161,11 @@ public class CategoriesValueCalculator {
         fileReader.close();
     }
 
+    public static String calculateProfit(Label monthIncomes, Label monthCosts) {
+        int profit = Integer.parseInt(monthIncomes.getText()) - Integer.parseInt(monthCosts.getText());
+        if (profit > 0) {
+            return "+" + profit;
+        }
+        return String.valueOf(profit);
+    }
 }

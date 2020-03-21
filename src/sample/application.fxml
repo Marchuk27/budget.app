@@ -16,189 +16,309 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
-<AnchorPane fx:id="pane" prefHeight="647.0" prefWidth="1011.0" style="-fx-background-color: #CCDCE3;" xmlns="http://javafx.com/javafx/8.0.231" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ApplicationController">
-   <children>
-      <AnchorPane fx:id="menu" prefHeight="680.0" prefWidth="210.0" style="-fx-background-color: #3D5064;">
-         <children>
-            <ImageView fx:id="logoView" fitHeight="98.0" fitWidth="167.0" layoutX="23.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../resources/png_pics/logo.png" />
-               </image>
-            </ImageView>
-            <Button fx:id="diaryButton" layoutX="24.0" layoutY="127.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="170.0" style="-fx-cursor: hand;" />
-            <Button fx:id="settingsButton" layoutX="24.0" layoutY="210.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="170.0" style="-fx-cursor: hand;" />
-            <Button fx:id="themeButton" layoutX="24.0" layoutY="291.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="170.0" style="-fx-cursor: hand;" />
-            <Button fx:id="infoButton" layoutX="24.0" layoutY="372.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="170.0" style="-fx-cursor: hand;" />
-            <Rectangle fx:id="g1" fill="#7abf34" height="50.0" layoutY="129.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" visible="false" width="8.0" />
-            <Rectangle fx:id="g2" fill="#7abf34" height="50.0" layoutY="218.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" visible="false" width="8.0" />
-            <Rectangle fx:id="g3" fill="#7abf34" height="50.0" layoutY="297.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" visible="false" width="8.0" />
-            <Rectangle fx:id="g4" fill="#7abf34" height="50.0" layoutY="380.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" visible="false" width="8.0" />
-            <FlowPane fx:id="treeViewAreaPane" layoutX="70.0" layoutY="182.0" prefHeight="120.0" prefWidth="72.0" style="-fx-background-color: #3D5064;" visible="false" />
-            <Label fx:id="deleteDiary" layoutX="157.0" layoutY="212.0" prefHeight="22.0" prefWidth="26.0" style="-fx-cursor: hand; -fx-background-image: url('/resources/png_pics/deleteButton.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;" visible="false" />
-            <CheckBox fx:id="deleteCheckBox1" layoutX="49.0" layoutY="187.0" mnemonicParsing="false" style="-fx-cursor: hand;" visible="false" />
-            <CheckBox fx:id="deleteCheckBox2" layoutX="49.0" layoutY="214.0" mnemonicParsing="false" style="-fx-cursor: hand;" visible="false" />
-            <Button fx:id="acceptButton" layoutX="49.0" layoutY="304.0" mnemonicParsing="false" style="-fx-cursor: hand; -fx-background-color: #c89b69; -fx-text-fill: white;" text="Подтвердить" visible="false">
-               <font>
-                  <Font size="12.4" />
-               </font></Button>
-            <CheckBox fx:id="deleteCheckBox3" layoutX="49.0" layoutY="243.0" mnemonicParsing="false" style="-fx-cursor: hand;" visible="false" />
-            <CheckBox fx:id="deleteCheckBox4" layoutX="49.0" layoutY="272.0" mnemonicParsing="false" style="-fx-cursor: hand;" visible="false" />
-            <Label fx:id="addDiary" layoutX="157.0" layoutY="182.0" prefHeight="26.0" prefWidth="23.0" style="-fx-cursor: hand; -fx-background-image: url('/resources/png_pics/addButtonPic.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;" visible="false" />
-            <ToggleButton fx:id="defaultThemeOn" layoutX="58.0" layoutY="360.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="107.0" visible="false" />
-            <ToggleButton fx:id="blueThemeOn" layoutX="58.0" layoutY="403.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="107.0" visible="false" />
-            <ToggleButton fx:id="redThemeOn" layoutX="58.0" layoutY="444.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="107.0" visible="false" />
-         </children>
-      </AnchorPane>
-      <Rectangle fx:id="head" arcHeight="5.0" arcWidth="5.0" fill="#7abf34" height="33.0" layoutX="211.0" stroke="#b9b5b5" strokeType="INSIDE" strokeWidth="0.0" width="805.0" />
-      <AnchorPane fx:id="eveningPane" layoutX="354.0" layoutY="128.0" prefHeight="340" prefWidth="507" visible="false">
-         <children>
-            <ImageView fitHeight="340" fitWidth="507" layoutX="9.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../resources/png_pics/goodEveningTheme.png" />
-               </image>
-            </ImageView>
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="morningPane" layoutX="354.0" layoutY="128.0" prefHeight="340.0" prefWidth="507" style="-fx-border-radius: 1px; -fx-background-color: linear-gradient(to bottom, #F69955, #E6D542); " visible="false">
-         <children>
-            <ImageView fitHeight="340" fitWidth="507" layoutX="9.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../resources/png_pics/goodMorningTheme.png" />
-               </image>
-            </ImageView>
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="nightPane" layoutX="354.0" layoutY="128.0" prefHeight="340.0" prefWidth="507.0" visible="false">
-         <children>
-            <ImageView fitHeight="318.0" fitWidth="469.0" layoutX="9.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../resources/png_pics/goodNightTheme.png" />
-               </image>
-            </ImageView>
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="afternoonPane" layoutX="354.0" layoutY="128.0" prefHeight="340.0" prefWidth="507.0" visible="false">
-         <children>
-            <ImageView fitHeight="318.0" fitWidth="469.0" layoutX="9.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../resources/png_pics/goodAfternoonTheme.png" />
-               </image>
-            </ImageView>
-         </children>
-      </AnchorPane>
-      <Label fx:id="diaryNameLabel" layoutX="543.0" layoutY="58.0" prefHeight="30.0" prefWidth="150.0" text="Название дневника" visible="false">
-         <font>
-            <Font name="Helvetica" size="18.0" />
-         </font>
-      </Label>
-      <FlowPane fx:id="paneWithMonthButtons" hgap="30.0" layoutX="312.0" layoutY="114.0" prefHeight="506.0" prefWidth="584.0" style="-fx-padding: 43px; -fx-background-color: none;" vgap="60.0" visible="false">
-         <children>
-            <Button fx:id="januaryButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="85.0" prefWidth="101.98" style="-fx-cursor: hand; -fx-background-image: url('/resources/months/january.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;" />
-            <Button fx:id="februaryButton" mnemonicParsing="false" prefHeight="85.0" prefWidth="101.98" style="-fx-cursor: hand; -fx-background-image: url('/resources/months/february.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;" />
-            <Button fx:id="marchButton" mnemonicParsing="false" prefHeight="85.0" prefWidth="101.98" style="-fx-cursor: hand; -fx-background-image: url('/resources/months/march.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;" />
-            <Button fx:id="aprilButton" mnemonicParsing="false" prefHeight="85.0" prefWidth="101.98" style="-fx-cursor: hand; -fx-background-image: url('/resources/months/april.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;" />
-            <Button fx:id="mayButton" mnemonicParsing="false" prefHeight="85.0" prefWidth="101.98" style="-fx-cursor: hand; -fx-background-image: url('/resources/months/may.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;" />
-            <Button fx:id="juneButton" mnemonicParsing="false" prefHeight="85.0" prefWidth="101.98" style="-fx-cursor: hand; -fx-background-image: url('/resources/months/june.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;" />
-            <Button fx:id="julyButton" mnemonicParsing="false" prefHeight="85.0" prefWidth="101.98" style="-fx-cursor: hand; -fx-background-image: url('/resources/months/july.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;" />
-            <Button fx:id="augustButton" mnemonicParsing="false" prefHeight="85.0" prefWidth="101.98" style="-fx-cursor: hand; -fx-background-image: url('/resources/months/august.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;" />
-            <Button fx:id="septemberButton" mnemonicParsing="false" prefHeight="85.0" prefWidth="101.98" style="-fx-cursor: hand; -fx-background-image: url('/resources/months/september.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;" />
-            <Button fx:id="octoberButton" mnemonicParsing="false" prefHeight="85.0" prefWidth="101.98" style="-fx-cursor: hand; -fx-background-image: url('/resources/months/october.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;" />
-            <Button fx:id="novemberButton" mnemonicParsing="false" prefHeight="85.0" prefWidth="101.98" style="-fx-cursor: hand; -fx-background-image: url('/resources/months/november.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;" />
-            <Button fx:id="decemberButton" mnemonicParsing="false" prefHeight="85.0" prefWidth="101.98" style="-fx-cursor: hand; -fx-background-image: url('/resources/months/december.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;" />
-         </children></FlowPane>
-      <AnchorPane fx:id="paneWithCategories" layoutX="224.0" layoutY="64.0" prefHeight="530.0" prefWidth="767.0" style="-fx-background-color: #EEF0F7;" visible="false" >
-         <children>
-            <!--Лэйблы категорий-->
-            <Label fx:id="supermarketsLabel" layoutX="29.0" layoutY="31.0" prefHeight="23.0" prefWidth="154" style="-fx-cursor: hand; -fx-background-image: url('/resources/categories_pics/supermarkets.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;" />
-            <Label fx:id="beautyAndHealthLabel" layoutX="29.0" layoutY="60.0" prefHeight="23.0" prefWidth="189.0" style="-fx-cursor: hand; -fx-background-image: url('/resources/categories_pics/beautyAndHealth.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;" />
-            <Label fx:id="houseAndRepairsLabel" layoutX="29.0" layoutY="89.0" prefHeight="23.0" prefWidth="140.0" style="-fx-cursor: hand; -fx-background-image: url('/resources/categories_pics/houseAndRepairs.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;" />
-            <Label fx:id="transportLabel" layoutX="29.0" layoutY="118.0" prefHeight="23.0" prefWidth="117.0" style="-fx-cursor: hand; -fx-background-image: url('/resources/categories_pics/transport.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;" />
-            <Label fx:id="clothesAndShoesLabel" layoutX="29.0" layoutY="147.0" prefHeight="23.0" prefWidth="165.0" style="-fx-cursor: hand; -fx-background-image: url('/resources/categories_pics/clothesAndShoes.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;" />
-            <Label fx:id="entertainmentsLabel" layoutX="29.0" layoutY="176.0" prefHeight="23.0" prefWidth="140.0" style="-fx-cursor: hand; -fx-background-image: url('/resources/categories_pics/entertainment.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;" />
-            <Label fx:id="giftsLabel" layoutX="29.0" layoutY="205.0" prefHeight="23.0" prefWidth="101.0" style="-fx-cursor: hand; -fx-background-image: url('/resources/categories_pics/gifts.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;" />
-            <Label fx:id="stateServicesLabel" layoutX="29.0" layoutY="234.0" prefHeight="23.0" prefWidth="120.0" style="-fx-cursor: hand; -fx-background-image: url('/resources/categories_pics/state_services.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;" />
-            <Label fx:id="zhkuLabel" layoutX="29.0" layoutY="263.0" prefHeight="23.0" prefWidth="191.0" style="-fx-cursor: hand; -fx-background-image: url('/resources/categories_pics/zkhSvyaz.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;" />
-            <Label fx:id="anotherCostsLabel" layoutX="29.0" layoutY="292.0" prefHeight="23.0" prefWidth="172.0" style="-fx-cursor: hand; -fx-background-image: url('/resources/categories_pics/anotherCosts.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;" />
-            <Label fx:id="costsLabel" layoutX="29.0" layoutY="7.0" prefHeight="20.0" prefWidth="77.0" style="-fx-cursor: hand; -fx-background-image: url('/resources/categories_pics/costs.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent; -fx-background-repeat: no-repeat" />
-            <Line endX="654.0" layoutX="112.0" layoutY="325.0" startX="-112.0" style="-fx-opacity: 0.5" />
-            <Label fx:id="incomesLabel" layoutX="29.0" layoutY="333.0" prefHeight="17.0" prefWidth="71.0" style="-fx-cursor: hand; -fx-background-image: url('/resources/categories_pics/incomes.png'); -fx-focus-color: transparent;-fx-background-repeat: no-repeat; -fx-faint-focus-color: transparent;" />
-            <Label fx:id="salaryLabel" layoutX="29.0" layoutY="361.0" prefHeight="23.0" prefWidth="104.0" style="-fx-cursor: hand; -fx-background-image: url('/resources/categories_pics/salary.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;" />
-            <Label fx:id="businessLabel" layoutX="29.0" layoutY="390.0" prefHeight="23.0" prefWidth="85.0" style="-fx-cursor: hand; -fx-background-image: url('/resources/categories_pics/bussines.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;" />
-            <Label fx:id="investLabel" layoutX="29.0" layoutY="419.0" prefHeight="23.0" prefWidth="135.0" style="-fx-cursor: hand; -fx-background-image: url('/resources/categories_pics/invest.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;" />
-            <Label fx:id="depositLabel" layoutX="29.0" layoutY="448.0" prefHeight="23.0" prefWidth="89.0" style="-fx-cursor: hand; -fx-background-image: url('/resources/categories_pics/contribution.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;" />
-            <Label fx:id="socialPaymentsLabel" layoutX="29.0" layoutY="477.0" prefHeight="23.0" prefWidth="144.0" style="-fx-cursor: hand; -fx-background-image: url('/resources/categories_pics/social_payments.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;" />
-            <Label fx:id="anotherIncomesLabel" layoutX="29.0" layoutY="506.0" prefHeight="23.0" prefWidth="163.0" style="-fx-cursor: hand; -fx-background-image: url('/resources/categories_pics/anotherprofit.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;" />
-            <!--Значения по каждой из категорий-->
-            <Label fx:id="supermarketsValue" layoutX="280.0" layoutY="33.0" prefHeight="17.0" prefWidth="59.0" />
-            <Label fx:id="beautyAndHealthValue" layoutX="280.0" layoutY="62.0" prefHeight="17.0" prefWidth="59.0" />
-            <Label fx:id="houseAndRepairsValue" layoutX="280.0" layoutY="91.0" prefHeight="17.0" prefWidth="59.0" />
-            <Label fx:id="transportValue" layoutX="280.0" layoutY="120.0" prefHeight="17.0" prefWidth="59.0" />
-            <Label fx:id="clothesAndShoesValue" layoutX="280.0" layoutY="149.0" prefHeight="17.0" prefWidth="59.0" />
-            <Label fx:id="entertainmentsValue" layoutX="280.0" layoutY="178.0" prefHeight="17.0" prefWidth="59.0" />
-            <Label fx:id="giftsValue" layoutX="280.0" layoutY="207.0" prefHeight="17.0" prefWidth="59.0" />
-            <Label fx:id="stateServicesValue" layoutX="280.0" layoutY="236.0" prefHeight="17.0" prefWidth="59.0" />
-            <Label fx:id="zhkuValue" layoutX="280.0" layoutY="265.0" prefHeight="17.0" prefWidth="59.0" />
-            <Label fx:id="anotherCostsValue" layoutX="280.0" layoutY="295.0" prefHeight="17.0" prefWidth="59.0" />
-            <Label fx:id="salaryValue" layoutX="280.0" layoutY="363.0" prefHeight="17.0" prefWidth="59.0" />
-            <Label fx:id="businessValue" layoutX="280.0" layoutY="392.0" prefHeight="17.0" prefWidth="59.0" />
-            <Label fx:id="investValue" layoutX="280.0" layoutY="421.0" prefHeight="17.0" prefWidth="59.0" />
-            <Label fx:id="depositValue" layoutX="280.0" layoutY="450.0" prefHeight="17.0" prefWidth="59.0" />
-            <Label fx:id="socialPaymentsValue" layoutX="280.0" layoutY="479.0" prefHeight="17.0" prefWidth="59.0" />
-            <Label fx:id="anotherIncomesValue" layoutX="280.0" layoutY="508.0" prefHeight="17.0" prefWidth="59.0" />
-            <Label fx:id="monthCosts" layoutX="566.0" layoutY="7.0" prefHeight="17.0" prefWidth="71.0" />
-            <Label fx:id="monthIncomes" layoutX="566.0" layoutY="333.0" prefHeight="17.0" prefWidth="71.0" />
-            <Label layoutX="445.0" layoutY="11.0" prefHeight="17.0" prefWidth="111.0" style="-fx-background-image: url('/resources/categories_pics/monthSum.png'); -fx-background-repeat: no-repeat;" />
-            <Label layoutX="445.0" layoutY="337.0" prefHeight="17.0" prefWidth="111.0" style="-fx-background-image: url('/resources/categories_pics/monthSum.png'); -fx-background-repeat: no-repeat;" />
-            <Label fx:id="revertLastValue" layoutX="259.0" layoutY="5" prefHeight="17.0" prefWidth="17" style="-fx-cursor: hand; -fx-background-image: url('/resources/png_pics/revert_value.png'); -fx-background-repeat: no-repeat;" />
-            <!--Обнулить значение для каждой категории-->
-            <Label fx:id="resetSupermarketsValue" layoutX="263.0" layoutY="36" prefHeight="12.0" prefWidth="10.5" style="-fx-cursor: hand; -fx-background-image: url('/resources/png_pics/resetButton.png'); -fx-background-repeat: no-repeat;" />
-            <Label fx:id="resetBeautyValue" layoutX="263.0" layoutY="65" prefHeight="12.0" prefWidth="10.5" style="-fx-cursor: hand; -fx-background-image: url('/resources/png_pics/resetButton.png'); -fx-background-repeat: no-repeat;" />
-            <Label fx:id="resetHouseValue" layoutX="263.0" layoutY="94" prefHeight="12.0" prefWidth="10.5" style="-fx-cursor: hand; -fx-background-image: url('/resources/png_pics/resetButton.png'); -fx-background-repeat: no-repeat;" />
-            <Label fx:id="resetTransportValue" layoutX="263.0" layoutY="123" prefHeight="12.0" prefWidth="10.5" style="-fx-cursor: hand; -fx-background-image: url('/resources/png_pics/resetButton.png'); -fx-background-repeat: no-repeat;" />
-            <Label fx:id="resetClothesValue" layoutX="263.0" layoutY="152" prefHeight="12.0" prefWidth="10.5" style="-fx-cursor: hand; -fx-background-image: url('/resources/png_pics/resetButton.png'); -fx-background-repeat: no-repeat;" />
-            <Label fx:id="resetEntertainmentsValue" layoutX="263.0" layoutY="181" prefHeight="12.0" prefWidth="10.5" style="-fx-cursor: hand; -fx-background-image: url('/resources/png_pics/resetButton.png'); -fx-background-repeat: no-repeat;" />
-            <Label fx:id="resetGiftsValue" layoutX="263.0" layoutY="210" prefHeight="12.0" prefWidth="10.5" style="-fx-cursor: hand; -fx-background-image: url('/resources/png_pics/resetButton.png'); -fx-background-repeat: no-repeat;" />
-            <Label fx:id="resetStateServicesValue" layoutX="263.0" layoutY="239" prefHeight="12.0" prefWidth="10.5" style="-fx-cursor: hand; -fx-background-image: url('/resources/png_pics/resetButton.png'); -fx-background-repeat: no-repeat;" />
-            <Label fx:id="resetZhkuValue" layoutX="263.0" layoutY="268" prefHeight="12.0" prefWidth="10.5" style="-fx-cursor: hand; -fx-background-image: url('/resources/png_pics/resetButton.png'); -fx-background-repeat: no-repeat;" />
-            <Label fx:id="resetAnotherCostsValue" layoutX="263.0" layoutY="298" prefHeight="12.0" prefWidth="10.5" style="-fx-cursor: hand; -fx-background-image: url('/resources/png_pics/resetButton.png'); -fx-background-repeat: no-repeat;" />
-            <Label fx:id="resetSalaryValue" layoutX="263.0" layoutY="366" prefHeight="12.0" prefWidth="10.5" style="-fx-cursor: hand; -fx-background-image: url('/resources/png_pics/resetButton.png'); -fx-background-repeat: no-repeat;" />
-            <Label fx:id="resetBusinessValue" layoutX="263.0" layoutY="395" prefHeight="12.0" prefWidth="10.5" style="-fx-cursor: hand; -fx-background-image: url('/resources/png_pics/resetButton.png'); -fx-background-repeat: no-repeat;" />
-            <Label fx:id="resetInvestValue" layoutX="263.0" layoutY="424" prefHeight="12.0" prefWidth="10.5" style="-fx-cursor: hand; -fx-background-image: url('/resources/png_pics/resetButton.png'); -fx-background-repeat: no-repeat;" />
-            <Label fx:id="resetDepositValue" layoutX="263.0" layoutY="453" prefHeight="12.0" prefWidth="10.5" style="-fx-cursor: hand; -fx-background-image: url('/resources/png_pics/resetButton.png'); -fx-background-repeat: no-repeat;" />
-            <Label fx:id="resetSocialPaymentsValue" layoutX="263.0" layoutY="482" prefHeight="12.0" prefWidth="10.5" style="-fx-cursor: hand; -fx-background-image: url('/resources/png_pics/resetButton.png'); -fx-background-repeat: no-repeat;" />
-            <Label fx:id="resetAnotherIncomesValue" layoutX="263.0" layoutY="511" prefHeight="12.0" prefWidth="10.5" style="-fx-cursor: hand; -fx-background-image: url('/resources/png_pics/resetButton.png'); -fx-background-repeat: no-repeat;" />
-            <PieChart fx:id="costsPieChart" layoutX="327.0" layoutY="8.0" prefHeight="315.0" prefWidth="439.0" />
-            <PieChart fx:id="incomesPieChart" layoutX="363.0" layoutY="330.0" prefHeight="264.0" prefWidth="374.0" />
-            <Button fx:id="showEventHistory" layoutX="361.5" layoutY="0.2" prefHeight="20.1" prefWidth="47.5" style="-fx-cursor: hand; -fx-background-image: url('/resources/png_pics/historyButton.png'); -fx-background-repeat: no-repeat; -fx-focus-color: transparent; -fx-faint-focus-color: transparent;" />
-            <Button fx:id="hideEventHistory" layoutX="348.5" layoutY="324.8" prefHeight="20.1" prefWidth="47.5" style="-fx-cursor: hand; -fx-background-image: url('/resources/png_pics/historyButton.png'); -fx-background-repeat: no-repeat; -fx-focus-color: transparent; -fx-faint-focus-color: transparent;" visible="false" />
-            <Button fx:id="showSideButton" layoutX="752.0" layoutY="301.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="19" style="-fx-cursor: hand; -fx-background-image: url('/resources/png_pics/sideButton.png'); -fx-background-repeat: no-repeat; -fx-focus-color: transparent; -fx-faint-focus-color: transparent;" />
-            <Button fx:id="hideSideButton" layoutX="446.0" layoutY="301.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="19" style="-fx-cursor: hand; -fx-background-image: url('/resources/png_pics/sideButton.png'); -fx-background-repeat: no-repeat; -fx-focus-color: transparent; -fx-faint-focus-color: transparent;" visible="false" />
-            <AnchorPane fx:id="sideBar" layoutX="465.0" prefHeight="594.0" prefWidth="306" style="-fx-background-image: url('/resources/png_pics/side_bar_plus.png'); -fx-background-repeat: no-repeat; -fx-focus-color: transparent; -fx-faint-focus-color: transparent;" visible="false">
-               <children>
-                  <Label fx:id="differenceLabel" layoutX="16.0" layoutY="87.0" prefHeight="18.0" prefWidth="95.0" style="-fx-font-size: 16; -fx-text-fill: #548720; -fx-font-family: 'Century Gothic';" />
-               </children>
-            </AnchorPane>
-            <AnchorPane fx:id="eventHistoryPane" visible="false" layoutX="255" style="-fx-focus-color: transparent; -fx-faint-focus-color: transparent;">
-               <children>
-                  <ScrollPane fx:id="eventScrollPane" fitToWidth="true">
-                     <GridPane fx:id="eventTable" hgap="30" prefWidth="235" minWidth="235" maxWidth="235" prefHeight="324" maxHeight="324">
-                        <rowConstraints />
-                        <columnConstraints>
-                           <ColumnConstraints minWidth="60" maxWidth="60"/>
-                           <ColumnConstraints minWidth="60" maxWidth="60"/>
-                           <ColumnConstraints minWidth="75" maxWidth="75"/>
-                        </columnConstraints>
-                        <Label text="Дата" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-                        <Label text="Категория" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-                        <Label text="Сумма" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
-                     </GridPane>
-                  </ScrollPane>
-               </children>
-            </AnchorPane>
-         </children>
-      </AnchorPane>
-      <Label fx:id="workAreaMonthAndDiaryLabel" layoutX="830.0" layoutY="37.0" maxWidth="189.0" prefHeight="26.0" visible="false" />
-      <Label fx:id="backToMonthLabel" layoutX="252.0" layoutY="42.0" prefHeight="15.51" prefWidth="13.9" visible="false" style="-fx-cursor: hand; -fx-background-image: url('/resources/months/back_button.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent; -fx-background-repeat: no-repeat;" />
-      <Label  fx:id="labelWithMonth" layoutX="269.0" layoutY="43.0" prefHeight="17.0" prefWidth="63.0" visible="false" style="-fx-cursor: hand; -fx-background-image: url('/resources/months/month_label.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent; -fx-background-repeat: no-repeat" />
-   </children>
+<AnchorPane fx:id="pane" prefHeight="647.0" prefWidth="1011.0" style="-fx-background-color: #CCDCE3;"
+            xmlns="http://javafx.com/javafx/8.0.231" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="sample.ApplicationController">
+    <children>
+        <AnchorPane fx:id="menu" prefHeight="680.0" prefWidth="210.0" style="-fx-background-color: #3D5064;">
+            <children>
+                <ImageView fx:id="logoView" fitHeight="98.0" fitWidth="167.0" layoutX="23.0" layoutY="30.0"
+                           pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../resources/png_pics/logo.png"/>
+                    </image>
+                </ImageView>
+                <Button fx:id="diaryButton" layoutX="24.0" layoutY="127.0" mnemonicParsing="false" prefHeight="50.0"
+                        prefWidth="170.0" style="-fx-cursor: hand;"/>
+                <Button fx:id="settingsButton" layoutX="24.0" layoutY="210.0" mnemonicParsing="false" prefHeight="50.0"
+                        prefWidth="170.0" style="-fx-cursor: hand;"/>
+                <Button fx:id="themeButton" layoutX="24.0" layoutY="291.0" mnemonicParsing="false" prefHeight="50.0"
+                        prefWidth="170.0" style="-fx-cursor: hand;"/>
+                <Button fx:id="infoButton" layoutX="24.0" layoutY="372.0" mnemonicParsing="false" prefHeight="50.0"
+                        prefWidth="170.0" style="-fx-cursor: hand;"/>
+                <Rectangle fx:id="g1" fill="#7abf34" height="50.0" layoutY="129.0" stroke="BLACK" strokeType="INSIDE"
+                           strokeWidth="0.0" visible="false" width="8.0"/>
+                <Rectangle fx:id="g2" fill="#7abf34" height="50.0" layoutY="218.0" stroke="BLACK" strokeType="INSIDE"
+                           strokeWidth="0.0" visible="false" width="8.0"/>
+                <Rectangle fx:id="g3" fill="#7abf34" height="50.0" layoutY="297.0" stroke="BLACK" strokeType="INSIDE"
+                           strokeWidth="0.0" visible="false" width="8.0"/>
+                <Rectangle fx:id="g4" fill="#7abf34" height="50.0" layoutY="380.0" stroke="BLACK" strokeType="INSIDE"
+                           strokeWidth="0.0" visible="false" width="8.0"/>
+                <FlowPane fx:id="treeViewAreaPane" layoutX="70.0" layoutY="182.0" prefHeight="120.0" prefWidth="72.0"
+                          style="-fx-background-color: #3D5064;" visible="false"/>
+                <Label fx:id="deleteDiary" layoutX="157.0" layoutY="212.0" prefHeight="22.0" prefWidth="26.0"
+                       style="-fx-cursor: hand; -fx-background-image: url('/resources/png_pics/deleteButton.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;"
+                       visible="false"/>
+                <CheckBox fx:id="deleteCheckBox1" layoutX="49.0" layoutY="187.0" mnemonicParsing="false"
+                          style="-fx-cursor: hand;" visible="false"/>
+                <CheckBox fx:id="deleteCheckBox2" layoutX="49.0" layoutY="214.0" mnemonicParsing="false"
+                          style="-fx-cursor: hand;" visible="false"/>
+                <Button fx:id="acceptButton" layoutX="49.0" layoutY="304.0" mnemonicParsing="false"
+                        style="-fx-cursor: hand; -fx-background-color: #c89b69; -fx-text-fill: white;"
+                        text="Подтвердить" visible="false">
+                    <font>
+                        <Font size="12.4"/>
+                    </font>
+                </Button>
+                <CheckBox fx:id="deleteCheckBox3" layoutX="49.0" layoutY="243.0" mnemonicParsing="false"
+                          style="-fx-cursor: hand;" visible="false"/>
+                <CheckBox fx:id="deleteCheckBox4" layoutX="49.0" layoutY="272.0" mnemonicParsing="false"
+                          style="-fx-cursor: hand;" visible="false"/>
+                <Label fx:id="addDiary" layoutX="157.0" layoutY="182.0" prefHeight="26.0" prefWidth="23.0"
+                       style="-fx-cursor: hand; -fx-background-image: url('/resources/png_pics/addButtonPic.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;"
+                       visible="false"/>
+                <ToggleButton fx:id="defaultThemeOn" layoutX="58.0" layoutY="360.0" mnemonicParsing="false"
+                              prefHeight="31.0" prefWidth="107.0" visible="false"/>
+                <ToggleButton fx:id="blueThemeOn" layoutX="58.0" layoutY="403.0" mnemonicParsing="false"
+                              prefHeight="31.0" prefWidth="107.0" visible="false"/>
+                <ToggleButton fx:id="redThemeOn" layoutX="58.0" layoutY="444.0" mnemonicParsing="false"
+                              prefHeight="31.0" prefWidth="107.0" visible="false"/>
+            </children>
+        </AnchorPane>
+        <Rectangle fx:id="head" arcHeight="5.0" arcWidth="5.0" fill="#7abf34" height="33.0" layoutX="211.0"
+                   stroke="#b9b5b5" strokeType="INSIDE" strokeWidth="0.0" width="805.0"/>
+        <AnchorPane fx:id="eveningPane" layoutX="354.0" layoutY="128.0" prefHeight="340" prefWidth="507"
+                    visible="false">
+            <children>
+                <ImageView fitHeight="340" fitWidth="507" layoutX="9.0" layoutY="8.0" pickOnBounds="true"
+                           preserveRatio="true">
+                    <image>
+                        <Image url="@../resources/png_pics/goodEveningTheme.png"/>
+                    </image>
+                </ImageView>
+            </children>
+        </AnchorPane>
+        <AnchorPane fx:id="morningPane" layoutX="354.0" layoutY="128.0" prefHeight="340.0" prefWidth="507"
+                    style="-fx-border-radius: 1px; -fx-background-color: linear-gradient(to bottom, #F69955, #E6D542); "
+                    visible="false">
+            <children>
+                <ImageView fitHeight="340" fitWidth="507" layoutX="9.0" layoutY="8.0" pickOnBounds="true"
+                           preserveRatio="true">
+                    <image>
+                        <Image url="@../resources/png_pics/goodMorningTheme.png"/>
+                    </image>
+                </ImageView>
+            </children>
+        </AnchorPane>
+        <AnchorPane fx:id="nightPane" layoutX="354.0" layoutY="128.0" prefHeight="340.0" prefWidth="507.0"
+                    visible="false">
+            <children>
+                <ImageView fitHeight="318.0" fitWidth="469.0" layoutX="9.0" layoutY="8.0" pickOnBounds="true"
+                           preserveRatio="true">
+                    <image>
+                        <Image url="@../resources/png_pics/goodNightTheme.png"/>
+                    </image>
+                </ImageView>
+            </children>
+        </AnchorPane>
+        <AnchorPane fx:id="afternoonPane" layoutX="354.0" layoutY="128.0" prefHeight="340.0" prefWidth="507.0"
+                    visible="false">
+            <children>
+                <ImageView fitHeight="318.0" fitWidth="469.0" layoutX="9.0" layoutY="8.0" pickOnBounds="true"
+                           preserveRatio="true">
+                    <image>
+                        <Image url="@../resources/png_pics/goodAfternoonTheme.png"/>
+                    </image>
+                </ImageView>
+            </children>
+        </AnchorPane>
+        <Label fx:id="diaryNameLabel" layoutX="543.0" layoutY="58.0" prefHeight="30.0" prefWidth="150.0"
+               text="Название дневника" visible="false">
+            <font>
+                <Font name="Helvetica" size="18.0"/>
+            </font>
+        </Label>
+        <FlowPane fx:id="paneWithMonthButtons" hgap="30.0" layoutX="312.0" layoutY="114.0" prefHeight="506.0"
+                  prefWidth="584.0" style="-fx-padding: 43px; -fx-background-color: none;" vgap="60.0" visible="false">
+            <children>
+                <Button fx:id="januaryButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="85.0"
+                        prefWidth="101.98"
+                        style="-fx-cursor: hand; -fx-background-image: url('/resources/months/january.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;"/>
+                <Button fx:id="februaryButton" mnemonicParsing="false" prefHeight="85.0" prefWidth="101.98"
+                        style="-fx-cursor: hand; -fx-background-image: url('/resources/months/february.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;"/>
+                <Button fx:id="marchButton" mnemonicParsing="false" prefHeight="85.0" prefWidth="101.98"
+                        style="-fx-cursor: hand; -fx-background-image: url('/resources/months/march.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;"/>
+                <Button fx:id="aprilButton" mnemonicParsing="false" prefHeight="85.0" prefWidth="101.98"
+                        style="-fx-cursor: hand; -fx-background-image: url('/resources/months/april.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;"/>
+                <Button fx:id="mayButton" mnemonicParsing="false" prefHeight="85.0" prefWidth="101.98"
+                        style="-fx-cursor: hand; -fx-background-image: url('/resources/months/may.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;"/>
+                <Button fx:id="juneButton" mnemonicParsing="false" prefHeight="85.0" prefWidth="101.98"
+                        style="-fx-cursor: hand; -fx-background-image: url('/resources/months/june.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;"/>
+                <Button fx:id="julyButton" mnemonicParsing="false" prefHeight="85.0" prefWidth="101.98"
+                        style="-fx-cursor: hand; -fx-background-image: url('/resources/months/july.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;"/>
+                <Button fx:id="augustButton" mnemonicParsing="false" prefHeight="85.0" prefWidth="101.98"
+                        style="-fx-cursor: hand; -fx-background-image: url('/resources/months/august.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;"/>
+                <Button fx:id="septemberButton" mnemonicParsing="false" prefHeight="85.0" prefWidth="101.98"
+                        style="-fx-cursor: hand; -fx-background-image: url('/resources/months/september.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;"/>
+                <Button fx:id="octoberButton" mnemonicParsing="false" prefHeight="85.0" prefWidth="101.98"
+                        style="-fx-cursor: hand; -fx-background-image: url('/resources/months/october.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;"/>
+                <Button fx:id="novemberButton" mnemonicParsing="false" prefHeight="85.0" prefWidth="101.98"
+                        style="-fx-cursor: hand; -fx-background-image: url('/resources/months/november.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;"/>
+                <Button fx:id="decemberButton" mnemonicParsing="false" prefHeight="85.0" prefWidth="101.98"
+                        style="-fx-cursor: hand; -fx-background-image: url('/resources/months/december.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;"/>
+            </children>
+        </FlowPane>
+        <AnchorPane fx:id="paneWithCategories" layoutX="224.0" layoutY="64.0" prefHeight="530.0" prefWidth="767.0"
+                    style="-fx-background-color: #EEF0F7;" visible="false">
+            <children>
+                <!--Лэйблы категорий-->
+                <Label fx:id="supermarketsLabel" layoutX="29.0" layoutY="31.0" prefHeight="23.0" prefWidth="153"
+                       style="-fx-cursor: hand; -fx-background-image: url('/resources/categories_pics/supermarkets.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;"/>
+                <Label fx:id="beautyAndHealthLabel" layoutX="29.0" layoutY="60.0" prefHeight="23.0" prefWidth="189.0"
+                       style="-fx-cursor: hand; -fx-background-image: url('/resources/categories_pics/beautyAndHealth.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;"/>
+                <Label fx:id="houseAndRepairsLabel" layoutX="29.0" layoutY="89.0" prefHeight="23.0" prefWidth="140.0"
+                       style="-fx-cursor: hand; -fx-background-image: url('/resources/categories_pics/houseAndRepairs.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;"/>
+                <Label fx:id="transportLabel" layoutX="29.0" layoutY="118.0" prefHeight="23.0" prefWidth="117.0"
+                       style="-fx-cursor: hand; -fx-background-image: url('/resources/categories_pics/transport.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;"/>
+                <Label fx:id="clothesAndShoesLabel" layoutX="29.0" layoutY="147.0" prefHeight="23.0" prefWidth="165.0"
+                       style="-fx-cursor: hand; -fx-background-image: url('/resources/categories_pics/clothesAndShoes.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;"/>
+                <Label fx:id="entertainmentsLabel" layoutX="29.0" layoutY="176.0" prefHeight="23.0" prefWidth="140.0"
+                       style="-fx-cursor: hand; -fx-background-image: url('/resources/categories_pics/entertainment.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;"/>
+                <Label fx:id="giftsLabel" layoutX="29.0" layoutY="205.0" prefHeight="23.0" prefWidth="101.0"
+                       style="-fx-cursor: hand; -fx-background-image: url('/resources/categories_pics/gifts.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;"/>
+                <Label fx:id="stateServicesLabel" layoutX="29.0" layoutY="234.0" prefHeight="23.0" prefWidth="120.0"
+                       style="-fx-cursor: hand; -fx-background-image: url('/resources/categories_pics/state_services.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;"/>
+                <Label fx:id="zhkuLabel" layoutX="29.0" layoutY="263.0" prefHeight="23.0" prefWidth="191.0"
+                       style="-fx-cursor: hand; -fx-background-image: url('/resources/categories_pics/zkhSvyaz.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;"/>
+                <Label fx:id="anotherCostsLabel" layoutX="29.0" layoutY="292.0" prefHeight="23.0" prefWidth="172.0"
+                       style="-fx-cursor: hand; -fx-background-image: url('/resources/categories_pics/anotherCosts.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;"/>
+                <Label fx:id="costsLabel" layoutX="29.0" layoutY="7.0" prefHeight="20.0" prefWidth="77.0"
+                       style="-fx-cursor: hand; -fx-background-image: url('/resources/categories_pics/costs.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent; -fx-background-repeat: no-repeat"/>
+                <Line endX="654.0" layoutX="112.0" layoutY="325.0" startX="-112.0" style="-fx-opacity: 0.5"/>
+                <Label fx:id="incomesLabel" layoutX="29.0" layoutY="333.0" prefHeight="17.0" prefWidth="71.0"
+                       style="-fx-cursor: hand; -fx-background-image: url('/resources/categories_pics/incomes.png'); -fx-focus-color: transparent;-fx-background-repeat: no-repeat; -fx-faint-focus-color: transparent;"/>
+                <Label fx:id="salaryLabel" layoutX="29.0" layoutY="361.0" prefHeight="23.0" prefWidth="104.0"
+                       style="-fx-cursor: hand; -fx-background-image: url('/resources/categories_pics/salary.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;"/>
+                <Label fx:id="businessLabel" layoutX="29.0" layoutY="390.0" prefHeight="23.0" prefWidth="85.0"
+                       style="-fx-cursor: hand; -fx-background-image: url('/resources/categories_pics/bussines.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;"/>
+                <Label fx:id="investLabel" layoutX="29.0" layoutY="419.0" prefHeight="23.0" prefWidth="135.0"
+                       style="-fx-cursor: hand; -fx-background-image: url('/resources/categories_pics/invest.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;"/>
+                <Label fx:id="depositLabel" layoutX="29.0" layoutY="448.0" prefHeight="23.0" prefWidth="89.0"
+                       style="-fx-cursor: hand; -fx-background-image: url('/resources/categories_pics/contribution.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;"/>
+                <Label fx:id="socialPaymentsLabel" layoutX="29.0" layoutY="477.0" prefHeight="23.0" prefWidth="144.0"
+                       style="-fx-cursor: hand; -fx-background-image: url('/resources/categories_pics/social_payments.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;"/>
+                <Label fx:id="anotherIncomesLabel" layoutX="29.0" layoutY="506.0" prefHeight="23.0" prefWidth="163.0"
+                       style="-fx-cursor: hand; -fx-background-image: url('/resources/categories_pics/anotherprofit.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent;"/>
+                <!--Значения по каждой из категорий-->
+                <Label fx:id="supermarketsValue" layoutX="280.0" layoutY="33.0" prefHeight="17.0" prefWidth="59.0"/>
+                <Label fx:id="beautyAndHealthValue" layoutX="280.0" layoutY="62.0" prefHeight="17.0" prefWidth="59.0"/>
+                <Label fx:id="houseAndRepairsValue" layoutX="280.0" layoutY="91.0" prefHeight="17.0" prefWidth="59.0"/>
+                <Label fx:id="transportValue" layoutX="280.0" layoutY="120.0" prefHeight="17.0" prefWidth="59.0"/>
+                <Label fx:id="clothesAndShoesValue" layoutX="280.0" layoutY="149.0" prefHeight="17.0" prefWidth="59.0"/>
+                <Label fx:id="entertainmentsValue" layoutX="280.0" layoutY="178.0" prefHeight="17.0" prefWidth="59.0"/>
+                <Label fx:id="giftsValue" layoutX="280.0" layoutY="207.0" prefHeight="17.0" prefWidth="59.0"/>
+                <Label fx:id="stateServicesValue" layoutX="280.0" layoutY="236.0" prefHeight="17.0" prefWidth="59.0"/>
+                <Label fx:id="zhkuValue" layoutX="280.0" layoutY="265.0" prefHeight="17.0" prefWidth="59.0"/>
+                <Label fx:id="anotherCostsValue" layoutX="280.0" layoutY="295.0" prefHeight="17.0" prefWidth="59.0"/>
+                <Label fx:id="salaryValue" layoutX="280.0" layoutY="363.0" prefHeight="17.0" prefWidth="59.0"/>
+                <Label fx:id="businessValue" layoutX="280.0" layoutY="392.0" prefHeight="17.0" prefWidth="59.0"/>
+                <Label fx:id="investValue" layoutX="280.0" layoutY="421.0" prefHeight="17.0" prefWidth="59.0"/>
+                <Label fx:id="depositValue" layoutX="280.0" layoutY="450.0" prefHeight="17.0" prefWidth="59.0"/>
+                <Label fx:id="socialPaymentsValue" layoutX="280.0" layoutY="479.0" prefHeight="17.0" prefWidth="59.0"/>
+                <Label fx:id="anotherIncomesValue" layoutX="280.0" layoutY="508.0" prefHeight="17.0" prefWidth="59.0"/>
+                <Label fx:id="monthCosts" layoutX="566.0" layoutY="7.0" prefHeight="17.0" prefWidth="71.0"/>
+                <Label fx:id="monthIncomes" layoutX="566.0" layoutY="333.0" prefHeight="17.0" prefWidth="71.0"/>
+                <Label layoutX="445.0" layoutY="11.0" prefHeight="17.0" prefWidth="111.0"
+                       style="-fx-background-image: url('/resources/categories_pics/monthSum.png'); -fx-background-repeat: no-repeat;"/>
+                <Label layoutX="445.0" layoutY="337.0" prefHeight="17.0" prefWidth="111.0"
+                       style="-fx-background-image: url('/resources/categories_pics/monthSum.png'); -fx-background-repeat: no-repeat;"/>
+                <Label fx:id="revertLastValue" layoutX="259.0" layoutY="5" prefHeight="17.0" prefWidth="17"
+                       style="-fx-cursor: hand; -fx-background-image: url('/resources/png_pics/revert_value.png'); -fx-background-repeat: no-repeat;"/>
+                <!--Обнулить значение для каждой категории-->
+                <Label fx:id="resetSupermarketsValue" layoutX="263.0" layoutY="36" prefHeight="12.0" prefWidth="10.5"
+                       style="-fx-cursor: hand; -fx-background-image: url('/resources/png_pics/resetButton.png'); -fx-background-repeat: no-repeat;"/>
+                <Label fx:id="resetBeautyValue" layoutX="263.0" layoutY="65" prefHeight="12.0" prefWidth="10.5"
+                       style="-fx-cursor: hand; -fx-background-image: url('/resources/png_pics/resetButton.png'); -fx-background-repeat: no-repeat;"/>
+                <Label fx:id="resetHouseValue" layoutX="263.0" layoutY="94" prefHeight="12.0" prefWidth="10.5"
+                       style="-fx-cursor: hand; -fx-background-image: url('/resources/png_pics/resetButton.png'); -fx-background-repeat: no-repeat;"/>
+                <Label fx:id="resetTransportValue" layoutX="263.0" layoutY="123" prefHeight="12.0" prefWidth="10.5"
+                       style="-fx-cursor: hand; -fx-background-image: url('/resources/png_pics/resetButton.png'); -fx-background-repeat: no-repeat;"/>
+                <Label fx:id="resetClothesValue" layoutX="263.0" layoutY="152" prefHeight="12.0" prefWidth="10.5"
+                       style="-fx-cursor: hand; -fx-background-image: url('/resources/png_pics/resetButton.png'); -fx-background-repeat: no-repeat;"/>
+                <Label fx:id="resetEntertainmentsValue" layoutX="263.0" layoutY="181" prefHeight="12.0" prefWidth="10.5"
+                       style="-fx-cursor: hand; -fx-background-image: url('/resources/png_pics/resetButton.png'); -fx-background-repeat: no-repeat;"/>
+                <Label fx:id="resetGiftsValue" layoutX="263.0" layoutY="210" prefHeight="12.0" prefWidth="10.5"
+                       style="-fx-cursor: hand; -fx-background-image: url('/resources/png_pics/resetButton.png'); -fx-background-repeat: no-repeat;"/>
+                <Label fx:id="resetStateServicesValue" layoutX="263.0" layoutY="239" prefHeight="12.0" prefWidth="10.5"
+                       style="-fx-cursor: hand; -fx-background-image: url('/resources/png_pics/resetButton.png'); -fx-background-repeat: no-repeat;"/>
+                <Label fx:id="resetZhkuValue" layoutX="263.0" layoutY="268" prefHeight="12.0" prefWidth="10.5"
+                       style="-fx-cursor: hand; -fx-background-image: url('/resources/png_pics/resetButton.png'); -fx-background-repeat: no-repeat;"/>
+                <Label fx:id="resetAnotherCostsValue" layoutX="263.0" layoutY="298" prefHeight="12.0" prefWidth="10.5"
+                       style="-fx-cursor: hand; -fx-background-image: url('/resources/png_pics/resetButton.png'); -fx-background-repeat: no-repeat;"/>
+                <Label fx:id="resetSalaryValue" layoutX="263.0" layoutY="366" prefHeight="12.0" prefWidth="10.5"
+                       style="-fx-cursor: hand; -fx-background-image: url('/resources/png_pics/resetButton.png'); -fx-background-repeat: no-repeat;"/>
+                <Label fx:id="resetBusinessValue" layoutX="263.0" layoutY="395" prefHeight="12.0" prefWidth="10.5"
+                       style="-fx-cursor: hand; -fx-background-image: url('/resources/png_pics/resetButton.png'); -fx-background-repeat: no-repeat;"/>
+                <Label fx:id="resetInvestValue" layoutX="263.0" layoutY="424" prefHeight="12.0" prefWidth="10.5"
+                       style="-fx-cursor: hand; -fx-background-image: url('/resources/png_pics/resetButton.png'); -fx-background-repeat: no-repeat;"/>
+                <Label fx:id="resetDepositValue" layoutX="263.0" layoutY="453" prefHeight="12.0" prefWidth="10.5"
+                       style="-fx-cursor: hand; -fx-background-image: url('/resources/png_pics/resetButton.png'); -fx-background-repeat: no-repeat;"/>
+                <Label fx:id="resetSocialPaymentsValue" layoutX="263.0" layoutY="482" prefHeight="12.0" prefWidth="10.5"
+                       style="-fx-cursor: hand; -fx-background-image: url('/resources/png_pics/resetButton.png'); -fx-background-repeat: no-repeat;"/>
+                <Label fx:id="resetAnotherIncomesValue" layoutX="263.0" layoutY="511" prefHeight="12.0" prefWidth="10.5"
+                       style="-fx-cursor: hand; -fx-background-image: url('/resources/png_pics/resetButton.png'); -fx-background-repeat: no-repeat;"/>
+                <PieChart fx:id="costsPieChart" layoutX="327.0" layoutY="8.0" prefHeight="315.0" prefWidth="439.0"/>
+                <PieChart fx:id="incomesPieChart" layoutX="363.0" layoutY="330.0" prefHeight="264.0" prefWidth="374.0"/>
+                <Label fx:id="showEventHistory" layoutX="361.5" layoutY="0.2" prefHeight="20.1" prefWidth="47.5"
+                        style="-fx-cursor: hand; -fx-background-image: url('/resources/png_pics/historyButton.png'); -fx-background-repeat: no-repeat; -fx-focus-color: transparent; -fx-faint-focus-color: transparent;"/>
+                <Label fx:id="hideEventHistory" layoutX="378.5" layoutY="380.7" prefHeight="20.1" prefWidth="47.5"
+                        style="-fx-cursor: hand; -fx-background-image: url('/resources/png_pics/historyButton.png'); -fx-background-repeat: no-repeat; -fx-focus-color: transparent; -fx-faint-focus-color: transparent;"
+                        visible="false"/>
+                <Button fx:id="showSideButton" layoutX="752.0" layoutY="301.0" mnemonicParsing="false" prefHeight="42.0"
+                        prefWidth="19"
+                        style="-fx-cursor: hand; -fx-background-image: url('/resources/png_pics/sideButton.png'); -fx-background-repeat: no-repeat; -fx-focus-color: transparent; -fx-faint-focus-color: transparent;"/>
+                <Button fx:id="hideSideButton" layoutX="446.0" layoutY="301.0" mnemonicParsing="false" prefHeight="42.0"
+                        prefWidth="19"
+                        style="-fx-cursor: hand; -fx-background-image: url('/resources/png_pics/sideButton.png'); -fx-background-repeat: no-repeat; -fx-focus-color: transparent; -fx-faint-focus-color: transparent;"
+                        visible="false"/>
+                <AnchorPane fx:id="sideBar" layoutX="465.0" prefHeight="594.0" prefWidth="306"
+                            style="-fx-background-image: url('/resources/png_pics/side_bar_plus.png'); -fx-background-repeat: no-repeat; -fx-focus-color: transparent; -fx-faint-focus-color: transparent;"
+                            visible="false">
+                    <children>
+                        <Label fx:id="differenceLabel" layoutX="16.0" layoutY="87.0" prefHeight="18.0" prefWidth="95.0"
+                               style="-fx-font-size: 16; -fx-text-fill: #548720; -fx-font-family: 'Century Gothic';"/>
+                    </children>
+                </AnchorPane>
+                <AnchorPane fx:id="eventHistoryPane" visible="false" layoutX="255"
+                            style="-fx-focus-color: transparent; -fx-faint-focus-color: transparent;">
+                    <children>
+                        <ScrollPane fitToWidth="true">
+                            <GridPane fx:id="eventTable" vgap="2" prefWidth="300" minWidth="300" maxWidth="300"
+                                      prefHeight="380" maxHeight="380" style="-fx-background-color: #EEF0F7;
+                                      -fx-border-color: #A3A1A1; -fx-border-width: 0.9">
+                                <rowConstraints/>
+                                <columnConstraints>
+                                    <ColumnConstraints minWidth="91" maxWidth="91"/>
+                                    <ColumnConstraints minWidth="102" maxWidth="102"/>
+                                    <ColumnConstraints minWidth="106" maxWidth="106"/>
+                                </columnConstraints>
+                                <ImageView fitHeight="24.0" fitWidth="91.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                                    <image>
+                                        <Image url="@../resources/categories_pics/event_history/history_date.png"/>
+                                    </image>
+                                </ImageView>
+                                <ImageView fitHeight="24.0" fitWidth="102.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                                    <image>
+                                        <Image url="@../resources/categories_pics/event_history/history_category.png"/>
+                                    </image>
+                                </ImageView>
+                                <ImageView fitHeight="24.0" fitWidth="105.0" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                                    <image>
+                                        <Image url="@../resources/categories_pics/event_history/history_sum.png"/>
+                                    </image>
+                                </ImageView>
+                            </GridPane>
+                        </ScrollPane>
+                    </children>
+                </AnchorPane>
+            </children>
+        </AnchorPane>
+        <Label fx:id="workAreaMonthAndDiaryLabel" layoutX="830.0" layoutY="37.0" maxWidth="189.0" prefHeight="26.0"
+               visible="false"/>
+        <Label fx:id="backToMonthLabel" layoutX="252.0" layoutY="42.0" prefHeight="15.51" prefWidth="13.9"
+               visible="false"
+               style="-fx-cursor: hand; -fx-background-image: url('/resources/months/back_button.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent; -fx-background-repeat: no-repeat;"/>
+        <Label fx:id="labelWithMonth" layoutX="269.0" layoutY="43.0" prefHeight="17.0" prefWidth="63.0" visible="false"
+               style="-fx-cursor: hand; -fx-background-image: url('/resources/months/month_label.png'); -fx-focus-color: transparent; -fx-faint-focus-color: transparent; -fx-background-repeat: no-repeat"/>
+    </children>
 </AnchorPane>

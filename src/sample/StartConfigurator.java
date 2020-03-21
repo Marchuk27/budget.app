@@ -20,10 +20,13 @@ public class StartConfigurator {
 
     public static String determineStartPath() {
         File firstFile = new File(new File("").getAbsolutePath());
-        File parentFile = firstFile.getParentFile();
-        File grandParentFile = parentFile.getParentFile();
-//        return grandParentFile.toString() + "/production/BudgetApp/files/";
-        return "C:/Users/aleks/Documents/BudgetApp/out/production/BudgetApp/files/";
+        File parentFile = firstFile.getParentFile().getParentFile();
+        return parentFile.toString() + "/production/BudgetApp/files/";
+//        return "C:/Users/aleks/Documents/BudgetApp/out/production/BudgetApp/files/";
+    }
+
+    public static void loadStartConfigFromTxt() {
+        File path = new File(determineStartPath().substring(0, determineStartPath().length() - 6));
     }
 
     protected void getStyleSheetsForNodes(AnchorPane pane, Button b1, Button b2, Button b3, Button b4, AnchorPane

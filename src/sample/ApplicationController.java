@@ -1,6 +1,7 @@
 package sample;
 
 import categories.AbstractCategory;
+import com.sun.istack.internal.Nullable;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -60,8 +61,7 @@ public class ApplicationController extends StartConfigurator {
     @FXML private CheckBox deleteCheckBox2;
     @FXML private CheckBox deleteCheckBox3;
     @FXML private CheckBox deleteCheckBox4;
-    List<CheckBox> checkBoxList = createCheckBoxListForDelete(deleteCheckBox1, deleteCheckBox2,
-            deleteCheckBox3, deleteCheckBox4);
+    List<CheckBox> checkBoxList;
 
     @FXML private Label diaryNameLabel;
     @FXML private Label workAreaMonthAndDiaryLabel;
@@ -71,10 +71,9 @@ public class ApplicationController extends StartConfigurator {
     @FXML private AnchorPane paneWithCategories;
 
     @FXML private AnchorPane eventHistoryPane;
-    @FXML private ScrollPane eventScrollPane;
     @FXML private GridPane eventTable;
-    @FXML private Button showEventHistory;
-    @FXML private Button hideEventHistory;
+    @FXML private Label showEventHistory;
+    @FXML private Label hideEventHistory;
 
     /**
      * Кнопки для месяцев
@@ -192,11 +191,14 @@ public class ApplicationController extends StartConfigurator {
 
     String MAIN_PATH = StartConfigurator.determineStartPath();
     File folder = new File(new File(MAIN_PATH).getAbsolutePath());
+    @Nullable
     File[] yearFilesArray = folder.listFiles();
 
     @FXML
     public void initialize() {
         greetingPanesList = createGreetingPanesList(morningPane, afternoonPane, eveningPane, nightPane);
+        checkBoxList = createCheckBoxListForDelete(deleteCheckBox1, deleteCheckBox2,
+                deleteCheckBox3, deleteCheckBox4);
         getStyleSheetsForNodes(pane, diaryButton, settingsButton, themeButton, infoButton, paneWithCategories);
         getStyleClassesForThemeButtons(defaultThemeOn, blueThemeOn, redThemeOn);
         calculateTime(greetingPanesList);
@@ -212,6 +214,8 @@ public class ApplicationController extends StartConfigurator {
         addSlicesToLists(slices, slices2, costsPieChart, incomesPieChart);
         setPieChartsData(slices, slices2, categoriesValueList, pieColors);
         setEventHandlerForLogoView(logoView);
+        addStyleClassForEventHistoryLabels(showEventHistory, hideEventHistory);
+        addStyleClassForSideMenuButtons(showSideButton, hideSideButton);
 
         //отображение дневников в пэйне по количеству лет
         treeViewAreaPane.setOrientation(Orientation.VERTICAL);
@@ -317,9 +321,6 @@ public class ApplicationController extends StartConfigurator {
             }
         });
         addDiary.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            Image image = new Image("https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Emojione_1F62D.svg/64px-Emojione_1F62D.svg.png");
-            ImageView imageView = new ImageView(image);
-
             @Override
             public void handle(MouseEvent mouseEvent) {
                 File[] yearFilesArr = folder.listFiles();
@@ -402,15 +403,20 @@ public class ApplicationController extends StartConfigurator {
                 labelWithMonth.setVisible(false);
                 int slashIndex = path.lastIndexOf("/");
                 path.delete(slashIndex + 1, path.length());
+
+                treeViewAreaPane.setVisible(true);
+                settingsButton.setLayoutY(329);
+                themeButton.setLayoutY(409);
+                infoButton.setLayoutY(491);
+                deleteDiary.setVisible(true);
+                addDiary.setVisible(true);
             }
         });
-        /**
-         кнопки
-         */
-        showEventHistory.setOnAction(new EventHandler<ActionEvent>() {
+
+        showEventHistory.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @SneakyThrows
             @Override
-            public void handle(ActionEvent event)  {
+            public void handle(MouseEvent event)  {
                 showEventHistory.setVisible(false);
                 hideEventHistory.setVisible(true);
                 eventHistoryPane.setVisible(true);
@@ -420,12 +426,14 @@ public class ApplicationController extends StartConfigurator {
             }
         });
 
-        hideEventHistory.setOnAction(new EventHandler<ActionEvent>() {
+        hideEventHistory.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
-            public void handle(ActionEvent event) {
+            public void handle(MouseEvent event) {
                 showEventHistory.setVisible(true);
                 hideEventHistory.setVisible(false);
                 eventHistoryPane.setVisible(false);
+                sideBar.setVisible(false);
+                hideSideButton.setVisible(false);
                 eventTable.getChildren().removeIf(node -> GridPane.getRowIndex(node) != 0);
             }
         });
@@ -434,9 +442,11 @@ public class ApplicationController extends StartConfigurator {
             @Override
             public void handle(ActionEvent event) {
                 sideBar.setVisible(true);
-                differenceLabel.setText(calculateProfit());
+                differenceLabel.setText(calculateProfit(monthIncomes, monthCosts));
                 hideSideButton.setVisible(true);
                 showSideButton.setVisible(false);
+                eventHistoryPane.setVisible(false);
+                hideEventHistory.setVisible(false);
             }
         });
 
@@ -463,6 +473,10 @@ public class ApplicationController extends StartConfigurator {
             }
         });
     }
+
+    /**
+     кнопки
+     */
 
     private void addDiaryNameLogic(TextInputDialog dialog) throws IOException {
         Optional<String> result = dialog.showAndWait();
@@ -514,7 +528,6 @@ public class ApplicationController extends StartConfigurator {
                 addStylesAndActionsForMonthButtons();
                 StringBuilder buttonText = new StringBuilder(button.getText());
                 Text diaryNameText = new Text(buttonText.toString());
-                diaryNameText.setFont(Font.loadFont("resources/fonts/montserrat/Montserrat-Bold.ttf", 120));
                 diaryNameLabel.setText(diaryNameText.getText());
                 path = new StringBuilder(MAIN_PATH);
                 path.append(buttonText).append("/");
@@ -604,10 +617,7 @@ public class ApplicationController extends StartConfigurator {
 
     private void addLabelsAndStylesToCategoriesLabelList() {
         addLabelsForCategoryList();
-        Tooltip tooltip = new Tooltip("Нажмите, чтобы добавить сумму");
-        tooltip.setPrefSize(180, 14);
-        tooltip.setStyle("-fx-background-color: #E9E1E1; -fx-text-fill: black;");
-        tooltip.setOpacity(0.9);
+        Tooltip tooltip = createToolTipsForCategories();
         for (Label myLabel : getCategoriesLabels(categoriesList)) {
             myLabel.getStyleClass().add("myLabel");
             myLabel.setTooltip(tooltip);
@@ -640,6 +650,7 @@ public class ApplicationController extends StartConfigurator {
         cancelTooltip.setStyle("-fx-background-color: #E9E1E1; -fx-text-fill: black;");
         cancelTooltip.setOpacity(0.9);
         revertLastValue.setTooltip(cancelTooltip);
+        revertLastValue.getStyleClass().add("revertValueLabel");
     }
 
     private void addLabelsForCategoryList() {
@@ -720,14 +731,6 @@ public class ApplicationController extends StartConfigurator {
     private void setMonthCostsAndIncomes() {
         monthCosts.setText((calculateGeneralCosts(categoriesValueList, slices, slices2, pieColors)));
         monthIncomes.setText((calculateGeneralIncomes(categoriesValueList, slices, slices2, pieColors)));
-    }
-
-    private String calculateProfit() {
-        int profit = Integer.parseInt(monthIncomes.getText()) - Integer.parseInt(monthCosts.getText());
-        if (profit > 0) {
-            return "+" + String.valueOf(profit);
-        }
-        return String.valueOf(profit);
     }
 
     private void setThemeButtonsLogic() {
@@ -837,5 +840,19 @@ public class ApplicationController extends StartConfigurator {
         buttonList.add(octoberButton);
         buttonList.add(novemberButton);
         buttonList.add(decemberButton);
+    }
+
+    private Tooltip createToolTipsForCategories() {
+        Tooltip tooltip = new Tooltip("Нажмите, чтобы добавить сумму");
+        tooltip.setPrefSize(180, 14);
+        tooltip.setStyle("-fx-background-color: #E9E1E1; -fx-text-fill: black;");
+        tooltip.setOpacity(0.9);
+
+        Tooltip showHistoryToolTip = new Tooltip("Показать последние операции");
+        showHistoryToolTip.setPrefSize(165, 14);
+        showHistoryToolTip.setStyle("-fx-background-color: #E9E1E1; -fx-text-fill: black;");
+        showHistoryToolTip.setOpacity(0.9);
+        showEventHistory.setTooltip(showHistoryToolTip);
+        return tooltip;
     }
 }

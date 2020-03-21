@@ -62,6 +62,15 @@ public class NodesUtils {
         addDiary.setVisible(false);
     }
 
+    public static void addStyleClassForEventHistoryLabels(Label showHistory, Label hideHistory) {
+        showHistory.getStyleClass().add("historyLabel");
+        hideHistory.getStyleClass().add("historyLabel");
+    }
+
+    public static void addStyleClassForSideMenuButtons(Button showReport, Button hideReport) {
+        showReport.getStyleClass().add("monthReportButton");
+        hideReport.getStyleClass().add("monthReportButton");
+    }
 
     public static List<CheckBox> createCheckBoxListForDelete(CheckBox cb1, CheckBox cb2, CheckBox cb3, CheckBox cb4) {
         return new ArrayList<>(Arrays.asList(cb1, cb2, cb3, cb4));

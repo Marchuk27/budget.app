@@ -1,6 +1,8 @@
 package utils;
 
 import dto.EventDto;
+import javafx.geometry.HPos;
+import javafx.geometry.VPos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
@@ -51,14 +53,22 @@ public class EventHistoryUtils {
         for (EventDto event : eventsHistory) {
             if (event.getCategoryLabelId() <= 9) {
                 sumLabel = new Label(String.valueOf(event.getOperationSum() * (-1)));
-                sumLabel.setStyle("-fx-text-fill: #ff332e");
+                sumLabel.setStyle("-fx-text-fill: #ff332e; -fx-font-family: Bahnschrift; -fx-font-size: 14");
             } else {
                 sumLabel = new Label("+" + (event.getOperationSum()));
-                sumLabel.setStyle("-fx-text-fill: green");
+                sumLabel.setStyle("-fx-text-fill: green; -fx-font-family: Bahnschrift; -fx-font-size: 14");
             }
+            GridPane.setValignment(sumLabel, VPos.CENTER);
+            GridPane.setHalignment(sumLabel, HPos.CENTER);
 
-            Label dateLabel = new Label(event.getDateOfEvent() + "\n   " + event.getTimeOfEvent());
-            Label categoryLabel = new Label(String.valueOf(event.getCategoryLabelId()));
+            Label dateLabel = new Label("    " + event.getDateOfEvent() + "\n        " + event.getTimeOfEvent());
+            GridPane.setValignment(dateLabel, VPos.CENTER);
+            dateLabel.setStyle("-fx-font-family: Bahnschrift; -fx-font-size: 12");
+
+            Label categoryLabel = new Label(getCategoryNameById(event.getCategoryLabelId()));
+            GridPane.setValignment(categoryLabel, VPos.CENTER);
+            GridPane.setHalignment(categoryLabel, HPos.CENTER);
+            categoryLabel.setStyle("-fx-font-family: Bahnschrift; -fx-font-size: 12");
 
             int eventIndex = eventsHistory.indexOf(event) + 1;
             table.add(dateLabel, 0 ,eventIndex);
@@ -86,5 +96,9 @@ public class EventHistoryUtils {
         if (list.size() == 1 && list.get(0).getDateOfEvent().equalsIgnoreCase(FRANKLIN_BDAY)) {
             list.remove(0);
         }
+    }
+
+    private static String getCategoryNameById(int categoryId) {
+        return CategoriesUtils.getCategoriesAsList().get(categoryId).getCategoryName();
     }
 }
