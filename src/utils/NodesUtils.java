@@ -86,14 +86,12 @@ public class NodesUtils {
     }
 
     public static void setDefaultVisibleForElements(FlowPane paneWithMonthButtons, AnchorPane paneWithCategories,
-                                                    Label diaryLabel, Label workAreaLabel, Label backToMonth,
-                                                    Label labelWithMonth) {
+                                                    Label diaryLabel, Label workAreaLabel, Label backToMonth) {
         paneWithMonthButtons.setVisible(false);
         paneWithCategories.setVisible(false);
         diaryLabel.setVisible(false);
         workAreaLabel.setVisible(false);
         backToMonth.setVisible(false);
-        labelWithMonth.setVisible(false);
     }
 
     public static void setParamsForWorkAreaMonthAndDiaryLabel(Label workAreaMonthAndDiaryLabel, Label diaryNameLabel,

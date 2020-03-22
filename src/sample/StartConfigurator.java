@@ -2,7 +2,7 @@ package sample;
 
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -31,7 +31,7 @@ public class StartConfigurator {
 
     protected void getStyleSheetsForNodes(AnchorPane pane, Button b1, Button b2, Button b3, Button b4, AnchorPane
             pane2) {
-        pane.getStylesheets().add(StartConfigurator.class.getResource("/css/HoverButton.css").toExternalForm());
+        pane.getStylesheets().add(StartConfigurator.class.getResource("/css/ButtonStyles.css").toExternalForm());
         b1.getStyleClass().add("diaryButton");
         b2.getStyleClass().add("settingsButton");
         b3.getStyleClass().add("themeButton");
@@ -39,7 +39,7 @@ public class StartConfigurator {
         pane2.getStylesheets().add(StartConfigurator.class.getResource("/css/CategoriesStyle.css").toExternalForm());
     }
 
-    protected void getStyleClassesForThemeButtons(ToggleButton b1, ToggleButton b2, ToggleButton b3) {
+    protected void getStyleClassesForThemeButtons(Label b1, Label b2, Label b3) {
         b1.getStyleClass().add("defaultTheme");
         b2.getStyleClass().add("nauticalTheme");
         b3.getStyleClass().add("raspberryTheme");

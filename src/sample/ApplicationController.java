@@ -66,7 +66,6 @@ public class ApplicationController extends StartConfigurator {
     @FXML private Label diaryNameLabel;
     @FXML private Label workAreaMonthAndDiaryLabel;
     @FXML private Label backToMonthLabel;
-    @FXML private Label labelWithMonth;
 
     @FXML private AnchorPane paneWithCategories;
 
@@ -174,9 +173,9 @@ public class ApplicationController extends StartConfigurator {
     @FXML private Label differenceLabel;
 
     private ToggleGroup themeGroup = new ToggleGroup();
-    @FXML private ToggleButton defaultThemeOn = new ToggleButton();
-    @FXML private ToggleButton blueThemeOn = new ToggleButton();
-    @FXML private ToggleButton redThemeOn = new ToggleButton();
+    @FXML private Label defaultThemeOn;
+    @FXML private Label blueThemeOn;
+    @FXML private Label redThemeOn;
 
     private List<AbstractCategory> categoriesList = getCategoriesAsList();
     private List<Label> categoriesLabelList = new ArrayList<>();
@@ -248,7 +247,7 @@ public class ApplicationController extends StartConfigurator {
                 redThemeOn.setVisible(false);
                 setDayPartPanesVisibleFalse(greetingPanesList);
                 setDefaultVisibleForElements(paneWithMonthButtons, paneWithCategories,
-                        diaryNameLabel, workAreaMonthAndDiaryLabel, backToMonthLabel, labelWithMonth);
+                        diaryNameLabel, workAreaMonthAndDiaryLabel, backToMonthLabel);
             }
         });
         settingsButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -275,7 +274,7 @@ public class ApplicationController extends StartConfigurator {
                 setConditionForThemeButton(treeViewAreaPane, settingsButton, themeButton,
                         infoButton, deleteDiary, addDiary);
                 setDefaultVisibleForElements(paneWithMonthButtons, paneWithCategories, diaryNameLabel,
-                        workAreaMonthAndDiaryLabel, backToMonthLabel, labelWithMonth);
+                        workAreaMonthAndDiaryLabel, backToMonthLabel);
                 diaryButton.setDisable(false);
             }
         });
@@ -400,7 +399,6 @@ public class ApplicationController extends StartConfigurator {
                 paneWithCategories.setVisible(false);
                 workAreaMonthAndDiaryLabel.setVisible(false);
                 backToMonthLabel.setVisible(false);
-                labelWithMonth.setVisible(false);
                 int slashIndex = path.lastIndexOf("/");
                 path.delete(slashIndex + 1, path.length());
 
@@ -538,7 +536,7 @@ public class ApplicationController extends StartConfigurator {
     }
 
     private void addStylesAndActionsForMonthButtons() {
-        paneWithMonthButtons.getStylesheets().add(getClass().getResource("/css/HoverButton.css").toExternalForm());
+        paneWithMonthButtons.getStylesheets().add(getClass().getResource("/css/ButtonStyles.css").toExternalForm());
         List<Button> buttonList = new ArrayList<>();
         fillMonthButtonList(buttonList);
         for (Button btn : buttonList) {
@@ -552,7 +550,6 @@ public class ApplicationController extends StartConfigurator {
                     diaryNameLabel.setVisible(false);
                     paneWithCategories.setVisible(true);
                     backToMonthLabel.setVisible(true);
-                    labelWithMonth.setVisible(true);
                     int len = btn.getId().length();
                     StringBuilder buttonName = new StringBuilder(btn.getId().substring(0, len - 6));
                     StringBuilder resultName = new StringBuilder(buttonName.toString().substring(0, 1).toUpperCase() + buttonName.toString().substring(1));
@@ -725,7 +722,7 @@ public class ApplicationController extends StartConfigurator {
 
         setDefaultConditionForButtons(treeViewAreaPane, settingsButton, themeButton, infoButton, deleteDiary, addDiary);
         setDefaultVisibleForElements(paneWithMonthButtons, paneWithCategories, diaryNameLabel, workAreaMonthAndDiaryLabel,
-                backToMonthLabel, labelWithMonth);
+                backToMonthLabel);
     }
 
     private void setMonthCostsAndIncomes() {
@@ -734,12 +731,9 @@ public class ApplicationController extends StartConfigurator {
     }
 
     private void setThemeButtonsLogic() {
-        defaultThemeOn.setToggleGroup(themeGroup);
-        blueThemeOn.setToggleGroup(themeGroup);
-        defaultThemeOn.setOnAction(new EventHandler<ActionEvent>() {
+        defaultThemeOn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
-            public void handle(ActionEvent event) {
-                defaultThemeOn.setSelected(true);
+            public void handle(MouseEvent event) {
                 changeColorForThemeElements(Color.rgb(122, 191, 52));
                 pane.setStyle("-fx-background-color: #CCDCE3;");
                 menu.setStyle("-fx-background-color: #3D5064;");
@@ -750,17 +744,14 @@ public class ApplicationController extends StartConfigurator {
                 addDiary.setStyle("-fx-background-image: url('/resources/png_pics/addButtonPic.png');");
                 treeViewAreaPane.setStyle("-fx-background-color: #3D5064;");
                 diaryNameLabel.setTextFill(Color.web("3D5064"));
-                backToMonthLabel.setStyle("-fx-background-image: url('/resources/months/back_button.png');" +
+                backToMonthLabel.setStyle("-fx-background-image: url('/resources/months/backToMonth.png');" +
                         "-fx-cursor: hand; -fx-background-repeat: no-repeat");
-                labelWithMonth.setStyle("-fx-background-image: url('/resources/months/month_label.png');" +
-                        "-fx-background-repeat: no-repeat");
                 workAreaMonthAndDiaryLabel.setTextFill(Color.rgb(61, 80, 100));
             }
         });
-        blueThemeOn.setOnAction(new EventHandler<ActionEvent>() {
+        blueThemeOn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
-            public void handle(ActionEvent event) {
-                blueThemeOn.setSelected(true);
+            public void handle(MouseEvent event) {
                 changeColorForThemeElements(Color.rgb(39, 168, 160));
                 pane.setStyle("-fx-background-color: #5E8A9D;");
                 menu.setStyle("-fx-background-color: #3D5064;");
@@ -771,18 +762,15 @@ public class ApplicationController extends StartConfigurator {
                 addDiary.setStyle("-fx-background-image: url('/resources/png_pics/addButtonPic.png');");
                 treeViewAreaPane.setStyle("-fx-background-color: #3D5064;");
                 diaryNameLabel.setTextFill(Color.web("3D5064"));
-                backToMonthLabel.setStyle("-fx-background-image: url('/resources/months/back_button.png');" +
+                backToMonthLabel.setStyle("-fx-background-image: url('/resources/months/backToMonth.png');" +
                         "-fx-cursor: hand; -fx-background-repeat: no-repeat");
-                labelWithMonth.setStyle("-fx-background-image: url('/resources/months/month_label.png');" +
-                        "-fx-background-repeat: no-repeat");
                 workAreaMonthAndDiaryLabel.setTextFill(Color.rgb(61, 80, 100));
             }
         });
 
-        redThemeOn.setOnAction(new EventHandler<ActionEvent>() {
+        redThemeOn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
-            public void handle(ActionEvent event) {
-                redThemeOn.setSelected(true);
+            public void handle(MouseEvent event) {
                 changeColorForThemeElements(Color.rgb(143, 14, 38));
                 pane.setStyle("-fx-background-color: #9F999B;");
                 menu.setStyle("-fx-background-color: #625F74;");
@@ -793,13 +781,12 @@ public class ApplicationController extends StartConfigurator {
                 infoButton.getStyleClass().add("redThemeInfoButton");
                 setEventHandlerForRedLogoView(logoView);
                 deleteDiary.setStyle("-fx-background-image: url('/resources/png_pics/red_deleteButton.png');");
-                addDiary.setStyle("-fx-background-image: url('/resources/png_pics/red_addButtonPic.png');");
+                addDiary.setStyle("-fx-background-image: url('/resources/png_pics/red_addButtonPic.png');" +
+                                "-fx-background-repeat: no-repeat");
                 treeViewAreaPane.setStyle("-fx-background-color: #625F74;");
                 diaryNameLabel.setTextFill(Color.rgb(98, 95, 116));
-                backToMonthLabel.setStyle("-fx-background-image: url('/resources/months/redtheme_back_button.png');" +
+                backToMonthLabel.setStyle("-fx-background-image: url('/resources/months/red_backToMonth.png');" +
                         "-fx-cursor: hand; -fx-background-repeat: no-repeat");
-                labelWithMonth.setStyle("-fx-background-image: url('/resources/months/red_theme_month_label.png');" +
-                        "-fx-background-repeat: no-repeat");
                 workAreaMonthAndDiaryLabel.setTextFill(Color.rgb(98, 95, 116));
             }
         });
