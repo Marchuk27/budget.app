@@ -1,5 +1,7 @@
 package enumerations;
 
+import lombok.Getter;
+
 public enum Months {
     january(1),
     february(2),
@@ -14,13 +16,10 @@ public enum Months {
     november(11),
     december(12);
 
+    @Getter
     private int value;
 
     Months(int value) {
         this.value = value;
-    }
-
-    public int getValue() {
-        return value;
     }
 }
