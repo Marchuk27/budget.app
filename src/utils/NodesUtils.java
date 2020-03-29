@@ -11,6 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import lombok.Cleanup;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -110,11 +111,10 @@ public class NodesUtils {
             File monthFile = new File(monthsDir + "//" + nameOfMonth.toString() + ".txt");
             boolean isMonthFileCreated = monthFile.createNewFile();
             if (isMonthFileCreated) {
-                FileWriter writer = new FileWriter(monthFile);
+                @Cleanup FileWriter writer = new FileWriter(monthFile);
                 for (String line : lines) {
                     writer.write(line + "\n");
                 }
-                writer.close();
             }
         }
     }

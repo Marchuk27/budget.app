@@ -3,6 +3,7 @@ package utils;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
+import lombok.Cleanup;
 import org.apache.commons.lang3.math.NumberUtils;
 import java.io.*;
 import java.util.ArrayList;
@@ -15,8 +16,8 @@ import static utils.DateUtils.*;
 public class CategoriesValueCalculator {
 
     public static void resetLabelValue(int labelNum, StringBuilder path, List<Label> categoriesValueList) throws IOException {
-        FileReader fileReader = new FileReader(path.toString());
-        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        @Cleanup FileReader fileReader = new FileReader(path.toString());
+        @Cleanup BufferedReader bufferedReader = new BufferedReader(fileReader);
         List<String> readLines = new ArrayList<>();
         String fileStr;
         while ((fileStr = bufferedReader.readLine()) != null) {
@@ -32,22 +33,19 @@ public class CategoriesValueCalculator {
         categoriesValueList.get(labelNum).setText(Long.toString(resultNum));
         StringBuilder zeroValue = new StringBuilder(readLines.get(labelNum).replace(currentNum.toString(), "0"));
         if (new File(path.toString()).exists()) {
-            FileWriter fileWriter = new FileWriter(path.toString());
+            @Cleanup FileWriter fileWriter = new FileWriter(path.toString());
             readLines.set(labelNum, zeroValue.toString());
             for (String val : readLines) {
                 fileWriter.write(val + "\n");
             }
-            fileWriter.close();
         }
-        fileReader.close();
-        bufferedReader.close();
     }
 
     public static void enterTheValueAndSummarizeWithCurrent(TextInputDialog dialog, int labelNum, StringBuilder path,
                                                        List<Label> categoriesValueList) throws IOException, ClassNotFoundException {
         Optional<String> result = dialog.showAndWait();
-        FileReader fileReader = new FileReader(path.toString());
-        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        @Cleanup FileReader fileReader = new FileReader(path.toString());
+        @Cleanup BufferedReader bufferedReader = new BufferedReader(fileReader);
         List<String> readLines = new ArrayList<String>();
         String monthName = path.substring(path.lastIndexOf("/") , path.length() - 4);
         String pathToDiary = path.substring(0, path.indexOf(monthName));
@@ -77,16 +75,11 @@ public class CategoriesValueCalculator {
                 }
             }
             if (new File(path.toString()).exists()) {
-                FileWriter fileWriter = new FileWriter(path.toString());
+                @Cleanup FileWriter fileWriter = new FileWriter(path.toString());
                 fileWriter.write(sb.toString());
-                fileWriter.close();
             }
-            bufferedReader.close();
-            fileReader.close();
             dialog.close();
         } else {
-            bufferedReader.close();
-            fileReader.close();
             dialog.close();
         }
     }
@@ -131,8 +124,8 @@ public class CategoriesValueCalculator {
 
     private static void rewriteCategoryValue(int labelNum, Long value, StringBuilder path,
                                              List<Label> categoriesValueList) throws IOException {
-        FileReader fileReader = new FileReader(path.toString());
-        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        @Cleanup FileReader fileReader = new FileReader(path.toString());
+        @Cleanup BufferedReader bufferedReader = new BufferedReader(fileReader);
         List<String> readLines = new ArrayList<String>();
 
         String fileStr1;
@@ -153,12 +146,9 @@ public class CategoriesValueCalculator {
             }
         }
         if (new File(path.toString()).exists()) {
-            FileWriter fileWriter = new FileWriter(path.toString());
+            @Cleanup FileWriter fileWriter = new FileWriter(path.toString());
             fileWriter.write(sb.toString());
-            fileWriter.close();
         }
-        bufferedReader.close();
-        fileReader.close();
     }
 
     public static String calculateProfit(Label monthIncomes, Label monthCosts) {

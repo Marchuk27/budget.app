@@ -15,6 +15,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.*;
+import lombok.Cleanup;
 import lombok.SneakyThrows;
 import utils.EventHistoryUtils;
 
@@ -568,8 +569,8 @@ public class ApplicationController extends StartConfigurator {
     }
 
     private void readLinesFromTxt(StringBuilder path) throws IOException {
-        FileReader fileReader = new FileReader(path.toString());
-        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        @Cleanup FileReader fileReader = new FileReader(path.toString());
+        @Cleanup BufferedReader bufferedReader = new BufferedReader(fileReader);
         readLines = new ArrayList<>();
         String fileStr;
         while ((fileStr = bufferedReader.readLine()) != null) {
@@ -585,8 +586,6 @@ public class ApplicationController extends StartConfigurator {
             categoryValueLabel.setVisible(true);
             k++;
         }
-        bufferedReader.close();
-        fileReader.close();
     }
 
     private void addLabelsToCategoriesValueList() {

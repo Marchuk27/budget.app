@@ -5,6 +5,7 @@ import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import lombok.Cleanup;
 
 import static sample.StartConfigurator.*;
 
@@ -30,11 +31,10 @@ public class EventHistoryUtils {
         checkListForTempEvent(eventList);
         eventList.add(0,event);
 
-        FileOutputStream fileOS = new FileOutputStream(determineStartPath() + monthName + "_history.txt");
+        @Cleanup FileOutputStream fileOS = new FileOutputStream(determineStartPath() + monthName + "_history.txt");
         ObjectOutputStream objectOS = new ObjectOutputStream(fileOS);
         objectOS.writeObject(eventList);
         objectOS.flush();
-        fileOS.close();
     }
 
     public static List<EventDto> loadEventsHistoryFromTxt(String monthName) throws IOException, ClassNotFoundException {
@@ -84,11 +84,9 @@ public class EventHistoryUtils {
             tempList = new ArrayList<>();
             tempList.add(new EventDto(FRANKLIN_BDAY, "04:20", 1, 1));
 
-            FileOutputStream fileOS = new FileOutputStream(eventHistory);
-            ObjectOutputStream objectOS = new ObjectOutputStream(fileOS);
+            @Cleanup FileOutputStream fileOS = new FileOutputStream(eventHistory);
+            @Cleanup ObjectOutputStream objectOS = new ObjectOutputStream(fileOS);
             objectOS.writeObject(tempList);
-            fileOS.close();
-            objectOS.close();
         }
     }
 
