@@ -2,6 +2,7 @@ package categories.incomes;
 
 import categories.AbstractCategory;
 import constants.CategoriesTextForFiles;
+import constants.CategoryNames;
 import enumerations.CategoriesColors;
 
 public class Business extends AbstractCategory {
@@ -19,7 +20,7 @@ public class Business extends AbstractCategory {
     }
 
     private static void setInstanceFields() {
-        instance.setCategoryName("Бизнес");
+        instance.setCategoryName(CategoryNames.BUSINESS);
         instance.setFieldToTxtFile(CategoriesTextForFiles.BUSINESS_TXT);
         instance.setCategoryColor(CategoriesColors.BUSINESS_COLOR);
     }

@@ -2,6 +2,7 @@ package categories.incomes;
 
 import categories.AbstractCategory;
 import constants.CategoriesTextForFiles;
+import constants.CategoryNames;
 import enumerations.CategoriesColors;
 
 public class SocialPayments extends AbstractCategory {
@@ -19,7 +20,7 @@ public class SocialPayments extends AbstractCategory {
     }
 
     private static void setInstanceFields() {
-        instance.setCategoryName("Cоц.выплаты");
+        instance.setCategoryName(CategoryNames.SOCIAL);
         instance.setFieldToTxtFile(CategoriesTextForFiles.SOCIAL_TXT);
         instance.setCategoryColor(CategoriesColors.SOCIAL_PAYMENTS_COLOR);
     }

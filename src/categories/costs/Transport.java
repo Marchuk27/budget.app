@@ -2,6 +2,7 @@ package categories.costs;
 
 import categories.AbstractCategory;
 import constants.CategoriesTextForFiles;
+import constants.CategoryNames;
 import enumerations.CategoriesColors;
 
 public class Transport extends AbstractCategory {
@@ -19,7 +20,7 @@ public class Transport extends AbstractCategory {
     }
 
     private static void setInstanceFields() {
-        instance.setCategoryName("Транспорт");
+        instance.setCategoryName(CategoryNames.TRANSPORT);
         instance.setFieldToTxtFile(CategoriesTextForFiles.TRANSPORT_TXT);
         instance.setCategoryColor(CategoriesColors.TRANSPORT_COLOR);
     }

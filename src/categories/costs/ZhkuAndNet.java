@@ -2,6 +2,7 @@ package categories.costs;
 
 import categories.AbstractCategory;
 import constants.CategoriesTextForFiles;
+import constants.CategoryNames;
 import enumerations.CategoriesColors;
 
 public class ZhkuAndNet extends AbstractCategory {
@@ -19,7 +20,7 @@ public class ZhkuAndNet extends AbstractCategory {
     }
 
     private static void setInstanceFields() {
-        instance.setCategoryName("ЖКУ и услуги связи");
+        instance.setCategoryName(CategoryNames.ZHKU);
         instance.setFieldToTxtFile(CategoriesTextForFiles.ZHKU_TXT);
         instance.setCategoryColor(CategoriesColors.ZHKU_COLOR);
     }

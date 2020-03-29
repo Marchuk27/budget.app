@@ -2,6 +2,7 @@ package categories.costs;
 
 import categories.AbstractCategory;
 import constants.CategoriesTextForFiles;
+import constants.CategoryNames;
 import enumerations.CategoriesColors;
 
 public class StateServices extends AbstractCategory {
@@ -19,7 +20,7 @@ public class StateServices extends AbstractCategory {
     }
 
     private static void setInstanceFields() {
-        instance.setCategoryName("Госуслуги");
+        instance.setCategoryName(CategoryNames.STATE);
         instance.setFieldToTxtFile(CategoriesTextForFiles.STATE_SERVICE_TXT);
         instance.setCategoryColor(CategoriesColors.STATE_SERVICES_COLOR);
     }

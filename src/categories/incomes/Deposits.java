@@ -2,6 +2,7 @@ package categories.incomes;
 
 import categories.AbstractCategory;
 import constants.CategoriesTextForFiles;
+import constants.CategoryNames;
 import enumerations.CategoriesColors;
 
 public class Deposits extends AbstractCategory {
@@ -19,7 +20,7 @@ public class Deposits extends AbstractCategory {
     }
 
     private static void setInstanceFields() {
-        instance.setCategoryName("Вклады");
+        instance.setCategoryName(CategoryNames.DEPOSIT);
         instance.setFieldToTxtFile(CategoriesTextForFiles.DEPOSIT_TXT);
         instance.setCategoryColor(CategoriesColors.DEPOSIT_COLOR);
     }

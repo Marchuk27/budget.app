@@ -2,6 +2,7 @@ package categories.costs;
 
 import categories.AbstractCategory;
 import constants.CategoriesTextForFiles;
+import constants.CategoryNames;
 import enumerations.CategoriesColors;
 
 public class Gifts extends AbstractCategory {
@@ -19,7 +20,7 @@ public class Gifts extends AbstractCategory {
     }
 
     private static void setInstanceFields() {
-        instance.setCategoryName("Подарки");
+        instance.setCategoryName(CategoryNames.GIFTS);
         instance.setFieldToTxtFile(CategoriesTextForFiles.GIFT_TXT);
         instance.setCategoryColor(CategoriesColors.GIFTS_COLOR);
     }
